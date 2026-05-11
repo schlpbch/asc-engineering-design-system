@@ -1,6 +1,6 @@
-# MCP Gateway UI Design System
+# ASC Engineering Design System
 
-> A comprehensive, accessible design system built for the MCP Gateway UI project
+> A comprehensive, accessible design system for the ASC Engineering portfolio
 > using Astro and Tailwind CSS.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9%2B-blue.svg)](https://www.typescriptlang.org/)
@@ -48,10 +48,10 @@ modern design principles and supports both light and dark themes out of the box.
 ## 🏗️ Architecture
 
 ```
-src/design-system/
+src/
 ├── tokens/           # Design tokens (colors, typography, spacing)
 ├── utils/           # Utility functions and types
-├── components/      # Primitive components
+├── components/      # Primitive components (29 total)
 ├── patterns/        # Higher-level component patterns
 └── index.ts         # Main entry point
 ```
@@ -69,24 +69,60 @@ Located in `tokens/index.ts`, these define the visual language of the system:
 
 ### Components
 
-#### Primitive Components
+#### Form Components
 
 - **Button**: Versatile button with variants, sizes, and states
 - **Input**: Text input with validation states and accessibility
 - **Textarea**: Multi-line text input
+
+#### Content Components
+
 - **Card**: Content container with various styles
 - **Alert**: Contextual feedback messages
 - **Badge**: Status indicators and labels
-- **Modal**: Dialog overlays
+- **Avatar**: User profile image with initials fallback
+
+#### Navigation Components
+
+- **Header**: Sticky navigation header with mobile hamburger menu
+- **Footer**: Page footer with branding and links
+- **Breadcrumb**: Navigation trail showing page hierarchy
+
+#### Data Display Components
+
+- **Table**: Data table with sorting, striping, and hover states
+- **Tabs**: Tabbed content interface with keyboard navigation
+- **Progress**: Progress bar showing completion percentage
+
+#### Dialog Components
+
+- **Modal**: Dialog overlays with header and footer
+- **ModalHeader**: Header section for modals
+- **ModalFooter**: Footer section for modals
+
+#### Interactive Components
+
+- **Dropdown**: Dropdown menu with keyboard support
+- **IconButton**: Button with icon-only display
+- **Tooltip**: Contextual help text on hover
+
+#### Feedback Components
+
+- **Toast**: Dismissible notifications with auto-dismiss
+- **LoadingSpinner**: Animated loading indicator
+- **Skeleton**: Content placeholder for loading states
 
 #### Layout Components
 
 - **Stack**: Flexible layout for spacing elements
 - **Container**: Responsive content containers
+- **IconContainer**: Container for icon display
 
 #### Patterns
 
 - **FormField**: Complete form field with label and validation
+- **ConfirmDialog**: Confirmation dialog pattern
+- **FilterButtons**: Button group for filtering
 
 ## 🚀 Getting Started
 
@@ -362,6 +398,133 @@ shadows.xl; // Extra large shadow
 >
   <Input placeholder="Your input here" />
 </FormField>
+```
+
+### Header
+
+```astro
+<Header
+  variant="default"
+  default
+  |
+  transparent
+  |
+  filled
+  sticky={false}
+  maxWidth="6xl"
+>
+  <div slot="logo">Logo</div>
+  <nav slot="nav">Navigation</nav>
+  <div slot="actions">Actions</div>
+</Header>
+```
+
+### Footer
+
+```astro
+<Footer
+  variant="default"
+  brand="Company Name"
+  copyright="© 2024"
+>
+  Footer content
+</Footer>
+```
+
+### Breadcrumb
+
+```astro
+<Breadcrumb
+  items={[
+    { label: 'Home', href: '/' },
+    { label: 'Products', href: '/products' },
+    { label: 'Details', href: '/products/1' },
+  ]}
+/>
+```
+
+### Table
+
+```astro
+<Table
+  caption="Data Table"
+  headers={[
+    { key: 'name', label: 'Name' },
+    { key: 'status', label: 'Status' },
+  ]}
+  rows={[
+    { name: 'Item 1', status: 'Active' },
+    { name: 'Item 2', status: 'Inactive' },
+  ]}
+  striped={true}
+  hoverable={true}
+  bordered={false}
+/>
+```
+
+### Tabs
+
+```astro
+<Tabs
+  variant="underline"
+  tabs={[
+    { id: 'tab1', label: 'Tab 1' },
+    { id: 'tab2', label: 'Tab 2' },
+  ]}
+  defaultActiveTab="tab1"
+>
+  <div slot="tab1">Content for tab 1</div>
+  <div slot="tab2">Content for tab 2</div>
+</Tabs>
+```
+
+### Progress
+
+```astro
+<Progress
+  value={65}
+  max={100}
+  size="md"
+  intent="primary"
+  showLabel={true}
+/>
+```
+
+### Dropdown
+
+```astro
+<Dropdown
+  label="Menu"
+  variant="default"
+  size="md"
+  align="left"
+>
+  <button>Option 1</button>
+  <button>Option 2</button>
+</Dropdown>
+```
+
+### Toast
+
+```astro
+<Toast
+  message="Action completed successfully!"
+  intent="success"
+  title="Success"
+  dismissible={true}
+  duration={5000}
+  position="bottom-right"
+/>
+```
+
+### Avatar
+
+```astro
+<Avatar
+  initials="AS"
+  size="md"
+  intent="primary"
+/>
 ```
 
 ---
@@ -801,7 +964,7 @@ If you encounter issues not covered here:
 
 ## 🔗 Related Resources
 
-- [MCP Orchestrator UI](../../README.md) - Main project documentation
+- [ASC Engineering](../../README.md) - Main project documentation
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Astro Component Documentation](https://docs.astro.build/en/core-concepts/astro-components/)
 - [WCAG Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
