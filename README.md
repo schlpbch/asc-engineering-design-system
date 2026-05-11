@@ -1,6 +1,7 @@
 # MCP Gateway UI Design System
 
-> A comprehensive, accessible design system built for the MCP Gateway UI project using Astro and Tailwind CSS.
+> A comprehensive, accessible design system built for the MCP Gateway UI project
+> using Astro and Tailwind CSS.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9%2B-blue.svg)](https://www.typescriptlang.org/)
 [![Astro](https://img.shields.io/badge/Astro-5.16%2B-orange.svg)](https://astro.build/)
@@ -31,7 +32,9 @@
 
 ## 🎯 Overview
 
-This design system provides a collection of reusable components, design tokens, and patterns for building consistent and accessible user interfaces. It follows modern design principles and supports both light and dark themes out of the box.
+This design system provides a collection of reusable components, design tokens,
+and patterns for building consistent and accessible user interfaces. It follows
+modern design principles and supports both light and dark themes out of the box.
 
 ### Key Principles
 
@@ -89,16 +92,17 @@ Located in `tokens/index.ts`, these define the visual language of the system:
 
 ### Installation
 
-The design system is already integrated into your project. Simply import components as needed:
+The design system is already integrated into your project. Simply import
+components as needed:
 
 ```astro
 ---
 // Import individual components
-import Button from '@mcp-orchestrator/design-system/components/Button.astro';
-import Card from '@mcp-orchestrator/design-system/components/Card.astro';
+import Button from '@asc-engineering/design-system/components/Button.astro';
+import Card from '@asc-engineering/design-system/components/Card.astro';
 
 // Or import from the main index
-import type { ButtonProps } from '@mcp-orchestrator/design-system';
+import type { ButtonProps } from '@asc-engineering/design-system';
 ---
 ```
 
@@ -106,7 +110,7 @@ import type { ButtonProps } from '@mcp-orchestrator/design-system';
 
 ```astro
 ---
-import { Button, Card, Stack, Alert } from '@mcp-orchestrator/design-system/components';
+import { Button, Card, Stack, Alert } from '@asc-engineering/design-system/components';
 ---
 
 <Card>
@@ -123,7 +127,8 @@ import { Button, Card, Stack, Alert } from '@mcp-orchestrator/design-system/comp
 
 ## 🎨 Design Tokens
 
-Design tokens are the visual design atoms of the system. They define colors, typography, spacing, and more.
+Design tokens are the visual design atoms of the system. They define colors,
+typography, spacing, and more.
 
 ### Color System
 
@@ -369,7 +374,7 @@ Common patterns and recipes for building UIs with the design system.
 
 ```astro
 ---
-import { FormField, Input, Button, Stack } from '@mcp-orchestrator/design-system/components';
+import { FormField, Input, Button, Stack } from '@asc-engineering/design-system/components';
 ---
 
 <form>
@@ -402,7 +407,7 @@ import { FormField, Input, Button, Stack } from '@mcp-orchestrator/design-system
 
 ```astro
 ---
-import { Card, Stack } from '@mcp-orchestrator/design-system/components';
+import { Card, Stack } from '@asc-engineering/design-system/components';
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -420,7 +425,7 @@ import { Card, Stack } from '@mcp-orchestrator/design-system/components';
 
 ```astro
 ---
-import { Alert, Stack } from '@mcp-orchestrator/design-system/components';
+import { Alert, Stack } from '@asc-engineering/design-system/components';
 ---
 
 <Stack size="md">
@@ -444,7 +449,7 @@ import { Alert, Stack } from '@mcp-orchestrator/design-system/components';
 
 ```astro
 ---
-import { Modal, Stack, Button } from '@mcp-orchestrator/design-system/components';
+import { Modal, Stack, Button } from '@asc-engineering/design-system/components';
 ---
 
 <Modal id="confirm-modal" title="Confirm Action">
@@ -465,7 +470,7 @@ import { Modal, Stack, Button } from '@mcp-orchestrator/design-system/components
 
 ```astro
 ---
-import { Card, Stack, Button } from '@mcp-orchestrator/design-system/components';
+import { Card, Stack, Button } from '@asc-engineering/design-system/components';
 ---
 
 <Card>
@@ -481,7 +486,7 @@ import { Card, Stack, Button } from '@mcp-orchestrator/design-system/components'
 
 ```astro
 ---
-import { Badge, Stack } from '@mcp-orchestrator/design-system/components';
+import { Badge, Stack } from '@asc-engineering/design-system/components';
 ---
 
 <Stack direction="horizontal" size="xs">
@@ -501,7 +506,11 @@ import { Badge, Stack } from '@mcp-orchestrator/design-system/components';
 Import tokens for consistent styling:
 
 ```typescript
-import { colors, spacing, typography } from '@mcp-orchestrator/design-system/tokens';
+import {
+  colors,
+  spacing,
+  typography,
+} from '@asc-engineering/design-system/tokens';
 
 const customStyles = {
   backgroundColor: colors.accent[500],
@@ -535,7 +544,8 @@ export const colors = {
 
 The design system prioritizes accessibility:
 
-- **Keyboard Navigation**: All interactive components support keyboard navigation
+- **Keyboard Navigation**: All interactive components support keyboard
+  navigation
 - **Screen Reader Support**: Proper ARIA labels and semantic HTML
 - **Color Contrast**: All color combinations meet WCAG guidelines
 - **Focus Management**: Clear focus indicators and logical focus flow
@@ -551,7 +561,8 @@ The design system prioritizes accessibility:
 
 ## 🌙 Dark Mode
 
-Dark mode is supported automatically. Components adapt based on the `.dark` class on the root element:
+Dark mode is supported automatically. Components adapt based on the `.dark`
+class on the root element:
 
 ```html
 <!-- Light mode -->
@@ -601,7 +612,8 @@ Components are mobile-first and responsive:
 
 ## 🧪 Testing
 
-Visit `/design-system` to see all components in action and test different states, variants, and sizes.
+Visit `/design-system` to see all components in action and test different
+states, variants, and sizes.
 
 ## 📝 Contributing
 
@@ -644,7 +656,8 @@ When contributing to the design system:
 **Solutions**:
 
 - Ensure Tailwind CSS is properly configured in `tailwind.config.mjs`
-- Check that the design system components are included in Tailwind's content paths
+- Check that the design system components are included in Tailwind's content
+  paths
 - Clear your build cache: `rm -rf .astro dist node_modules/.astro`
 - Rebuild: `pnpm run build`
 
@@ -665,7 +678,8 @@ When contributing to the design system:
 
 **Solutions**:
 
-- Verify the `.dark` class is added to the root element (usually `<html>` or `<body>`)
+- Verify the `.dark` class is added to the root element (usually `<html>` or
+  `<body>`)
 - Check that dark mode variants are enabled in `tailwind.config.mjs`
 - Ensure components are using dark mode classes: `dark:bg-gray-800`
 - Clear browser cache and reload the page
@@ -679,7 +693,8 @@ When contributing to the design system:
 - Check browser console for errors
 - Verify the component is properly imported
 - Ensure all required props are provided
-- Check that the component is used within a valid Astro file (`.astro` extension)
+- Check that the component is used within a valid Astro file (`.astro`
+  extension)
 - Verify that client-side directives (`client:load`, etc.) are used if needed
 
 #### Accessibility Warnings
@@ -722,8 +737,10 @@ When contributing to the design system:
 
 If you encounter issues not covered here:
 
-1. **Check the Astro Documentation**: [https://docs.astro.build](https://docs.astro.build)
-2. **Review Tailwind CSS Docs**: [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
+1. **Check the Astro Documentation**:
+   [https://docs.astro.build](https://docs.astro.build)
+2. **Review Tailwind CSS Docs**:
+   [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
 3. **Search GitHub Issues**: Check for known issues in the project repository
 4. **Ask for Help**: Open a new issue with:
    - Description of the problem
@@ -738,22 +755,30 @@ If you encounter issues not covered here:
 
 ### Official Documentation
 
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Utility-first CSS framework
-- [Astro Component Documentation](https://docs.astro.build/en/core-concepts/astro-components/) - Astro component syntax and features
-- [TypeScript Handbook](https://www.typescriptlang.org/docs/) - TypeScript language reference
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - Utility-first CSS
+  framework
+- [Astro Component Documentation](https://docs.astro.build/en/core-concepts/astro-components/) -
+  Astro component syntax and features
+- [TypeScript Handbook](https://www.typescriptlang.org/docs/) - TypeScript
+  language reference
 
 ### Accessibility Resources
 
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) - Web Content Accessibility Guidelines
-- [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/) - Accessible Rich Internet Applications
-- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) - Check color contrast ratios
-- [Inclusive Components](https://inclusive-components.design/) - Accessible component patterns
+- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/) - Web Content
+  Accessibility Guidelines
+- [ARIA Authoring Practices](https://www.w3.org/WAI/ARIA/apg/) - Accessible Rich
+  Internet Applications
+- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) -
+  Check color contrast ratios
+- [Inclusive Components](https://inclusive-components.design/) - Accessible
+  component patterns
 
 ### Design Resources
 
 - [Refactoring UI](https://www.refactoringui.com/) - Design tips for developers
 - [Laws of UX](https://lawsofux.com/) - Psychology principles for designers
-- [Material Design](https://material.io/design) - Google's design system documentation
+- [Material Design](https://material.io/design) - Google's design system
+  documentation
 
 ---
 
@@ -763,7 +788,8 @@ If you encounter issues not covered here:
 
 **Initial Release**:
 
-- ✅ Complete component library (Button, Input, Card, Alert, Badge, Modal, Stack, FormField)
+- ✅ Complete component library (Button, Input, Card, Alert, Badge, Modal,
+  Stack, FormField)
 - ✅ Design tokens (colors, typography, spacing, shadows)
 - ✅ Dark mode support
 - ✅ WCAG 2.1 AA accessibility compliance
