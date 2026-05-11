@@ -1,0 +1,42 @@
+---
+import Container from '../components/Container.astro';
+
+export interface Props {
+  id?: string;
+  title: string;
+  subtitle?: string;
+  border?: boolean;
+  padding?: string;
+}
+
+const { id, title, subtitle, border = false, padding = 'py-16' } = Astro.props;
+---
+
+<section
+  id={id}
+  data-animate
+  class:list={[
+    padding,
+    'opacity-0 transition-opacity duration-500',
+    border && 'border-b border-slate-100 dark:border-slate-800',
+  ]}
+>
+  <Container maxWidth="4xl" size="sm">
+    <h2
+      class:list={[
+        'text-xl font-semibold text-slate-900 dark:text-white',
+        subtitle ? 'mb-2' : 'mb-8',
+      ]}
+    >
+      {title}
+    </h2>
+    {
+      subtitle && (
+        <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-8">
+          {subtitle}
+        </p>
+      )
+    }
+    <slot />
+  </Container>
+</section>

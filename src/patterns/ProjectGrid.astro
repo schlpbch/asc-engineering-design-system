@@ -1,0 +1,94 @@
+---
+import Card from '../components/Card.astro';
+import Badge from '../components/Badge.astro';
+import Stack from '../components/Stack.astro';
+import PageSection from './PageSection.astro';
+import type { Project } from '../utils/types';
+
+export interface Props {
+  projects: Project[];
+  id?: string;
+  title?: string;
+  border?: boolean;
+  featured?: boolean;
+  viewAllHref?: string;
+}
+
+const {
+  projects,
+  id,
+  title = 'Projects',
+  border = false,
+  featured = false,
+  viewAllHref = '/work',
+} = Astro.props;
+---
+
+<PageSection id={id} title={title} border={border}>
+  <div class:list={['grid grid-cols-1 sm:grid-cols-2', featured ? 'gap-6' : 'gap-4']}>
+    {
+      featured
+        ? projects.map((project) => (
+            <a href={project.href} target="_blank" rel="noopener noreferrer">
+              <Card variant="interactive" size="md" className="h-full">
+                <Stack direction="vertical" size="md">
+                  <div>
+                    <h3 class="font-semibold text-slate-900 dark:text-white mb-2">
+                      {project.name}
+                    </h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                  <Stack direction="horizontal" size="xs" wrap>
+                    {project.tech.map((tech) => (
+                      <Badge intent="secondary" variant="outline" size="xs" shape="pill">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </Stack>
+                </Stack>
+              </Card>
+            </a>
+          ))
+        : projects.map((project) => (
+            <a
+              href={project.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block no-underline"
+            >
+              <Card variant="default" size="md" interactive className="h-full">
+                <Stack direction="vertical" size="sm" className="h-full">
+                  <h3 class="font-semibold text-slate-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors">
+                    {project.name}
+                  </h3>
+                  <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed flex-1">
+                    {project.description}
+                  </p>
+                  <Stack direction="horizontal" size="xs" wrap>
+                    {project.tech.map((t) => (
+                      <Badge intent="secondary" variant="outline" size="sm" shape="rounded">
+                        {t}
+                      </Badge>
+                    ))}
+                  </Stack>
+                </Stack>
+              </Card>
+            </a>
+          ))
+    }
+  </div>
+  {
+    featured && (
+      <div class="mt-8 text-center">
+        <a
+          href={viewAllHref}
+          class="text-accent-600 dark:text-accent-400 hover:text-accent-700 dark:hover:text-accent-300 transition-colors font-medium"
+        >
+          View all work &rarr;
+        </a>
+      </div>
+    )
+  }
+</PageSection>

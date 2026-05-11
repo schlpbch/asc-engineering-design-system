@@ -1,0 +1,45 @@
+---
+import Card from '../components/Card.astro';
+import Stack from '../components/Stack.astro';
+import PageSection from './PageSection.astro';
+import type { Testimonial } from '../utils/types';
+
+export interface Props {
+  testimonials: Testimonial[];
+  title?: string;
+}
+
+const { testimonials, title = 'Testimonials' } = Astro.props;
+---
+
+<PageSection title={title}>
+  <Stack direction="vertical" size="lg">
+    {
+      testimonials.map((t) => (
+        <Card variant="default" size="md">
+          <Stack direction="vertical" size="md">
+            <div class="relative">
+              <svg
+                class="absolute -top-2 -left-2 w-8 h-8 text-accent-300 dark:text-accent-700 opacity-25"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-4.716-2.5-6-2.5-1.29 0-2 .75-2 1.972V11c0 1-1 4-1 4-1 3-4 7-6 8s5.061 6 9 6c2.957 0 4.538-2.639 4.810-4.287.278-1.531.557-4.271-.048-5.42C15.597 17.725 13.933 16 11.5 16H10c-1 0-1-1-1-1z" />
+              </svg>
+              <p class="text-slate-700 dark:text-slate-300 leading-relaxed italic pl-4">
+                "{t.quote}"
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+              <p class="font-semibold text-slate-900 dark:text-white">{t.author}</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400">
+                {t.title} · {t.company}
+              </p>
+            </div>
+          </Stack>
+        </Card>
+      ))
+    }
+  </Stack>
+</PageSection>

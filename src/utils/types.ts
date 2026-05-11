@@ -120,3 +120,32 @@ export interface ValidationProps {
   success?: string;
   hint?: string;
 }
+
+// Pattern data types
+
+export interface TimelineItem {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  bullets: string[];
+}
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  company: string;
+}
+
+export interface Skill {
+  name: string;
+  level: 'expert' | 'proficient' | 'familiar';
+}
+
+export interface Project {
+  name: string;
+  description: string;
+  tech: string[];
+  href: string;
+}

@@ -60,6 +60,11 @@ export { default as SectionHeader } from './components/SectionHeader.astro';
 export { default as FormField } from './patterns/FormField.astro';
 export { default as ConfirmDialog } from './patterns/ConfirmDialog.astro';
 export { default as FilterButtons } from './patterns/FilterButtons.astro';
+export { default as PageSection } from './patterns/PageSection.astro';
+export { default as Timeline } from './patterns/Timeline.astro';
+export { default as TestimonialsGrid } from './patterns/TestimonialsGrid.astro';
+export { default as SkillsGrid } from './patterns/SkillsGrid.astro';
+export { default as ProjectGrid } from './patterns/ProjectGrid.astro';
 
 // Component Types (for TypeScript)
 export type { Props as ButtonProps } from './components/Button.astro';
@@ -90,6 +95,11 @@ export type { Props as IconContainerProps } from './components/IconContainer.ast
 export type { Props as SectionHeaderProps } from './components/SectionHeader.astro';
 export type { Props as FormFieldProps } from './patterns/FormField.astro';
 export type { Props as FilterButtonsProps } from './patterns/FilterButtons.astro';
+export type { Props as PageSectionProps } from './patterns/PageSection.astro';
+export type { Props as TimelineProps } from './patterns/Timeline.astro';
+export type { Props as TestimonialsGridProps } from './patterns/TestimonialsGrid.astro';
+export type { Props as SkillsGridProps } from './patterns/SkillsGrid.astro';
+export type { Props as ProjectGridProps } from './patterns/ProjectGrid.astro';
 
 // Re-export common types for convenience
 export type { Size, Intent } from './tokens';
@@ -101,4 +111,8 @@ export type {
   LoadingProps,
   DisabledProps,
   InteractiveProps,
+  TimelineItem,
+  Testimonial,
+  Skill,
+  Project,
 } from './utils/types';
