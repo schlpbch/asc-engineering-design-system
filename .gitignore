@@ -4,3 +4,6 @@ dist/
 storybook-static/
 *.local
 .env
+
+# Local Netlify folder
+.netlify

@@ -31,7 +31,7 @@ export const Underline = {
       { id: 'settings', label: 'Settings' },
     ],
     activeTab: 'overview',
-    slots: {
+    panels: {
       overview: '<p style="color:#64748b;padding:0.5rem 0;">Overview panel content goes here.</p>',
       analytics: '<p style="color:#64748b;padding:0.5rem 0;">Analytics panel content goes here.</p>',
       settings: '<p style="color:#64748b;padding:0.5rem 0;">Settings panel content goes here.</p>',
@@ -49,7 +49,7 @@ export const Pills = {
       { id: 'archived', label: 'Archived' },
     ],
     activeTab: 'all',
-    slots: {
+    panels: {
       all: '<p style="color:#64748b;padding:0.5rem 0;">Showing all items.</p>',
       active: '<p style="color:#64748b;padding:0.5rem 0;">Showing active items only.</p>',
       archived: '<p style="color:#64748b;padding:0.5rem 0;">Showing archived items.</p>',
@@ -67,7 +67,7 @@ export const Bordered = {
       { id: 'notifications', label: 'Notifications' },
     ],
     activeTab: 'profile',
-    slots: {
+    panels: {
       profile: '<p style="color:#64748b;padding:0.5rem 0;">Profile settings content.</p>',
       billing: '<p style="color:#64748b;padding:0.5rem 0;">Billing information content.</p>',
       notifications: '<p style="color:#64748b;padding:0.5rem 0;">Notification preferences content.</p>',
@@ -86,7 +86,7 @@ export const WithBadge = {
       { id: 'spam', label: 'Spam', badge: '1' },
     ],
     activeTab: 'inbox',
-    slots: {
+    panels: {
       inbox: '<p style="color:#64748b;padding:0.5rem 0;">12 unread messages in your inbox.</p>',
       sent: '<p style="color:#64748b;padding:0.5rem 0;">3 sent messages.</p>',
       drafts: '<p style="color:#64748b;padding:0.5rem 0;">No drafts saved.</p>',
@@ -105,7 +105,7 @@ export const WithDisabled = {
       { id: 'beta', label: 'Beta Features', disabled: true },
     ],
     activeTab: 'general',
-    slots: {
+    panels: {
       general: '<p style="color:#64748b;padding:0.5rem 0;">General settings content.</p>',
       advanced: '<p style="color:#64748b;padding:0.5rem 0;">Advanced settings content.</p>',
       beta: '<p style="color:#64748b;padding:0.5rem 0;">Beta features (disabled).</p>',
@@ -124,7 +124,7 @@ export const SizeSm = {
       { id: 'tab3', label: 'Tab Three' },
     ],
     activeTab: 'tab1',
-    slots: {
+    panels: {
       tab1: '<p style="color:#64748b;font-size:0.875rem;padding:0.5rem 0;">Content for tab one.</p>',
       tab2: '<p style="color:#64748b;font-size:0.875rem;padding:0.5rem 0;">Content for tab two.</p>',
       tab3: '<p style="color:#64748b;font-size:0.875rem;padding:0.5rem 0;">Content for tab three.</p>',
@@ -143,7 +143,7 @@ export const SizeLg = {
       { id: 'tab3', label: 'Tab Three' },
     ],
     activeTab: 'tab1',
-    slots: {
+    panels: {
       tab1: '<p style="color:#64748b;padding:0.5rem 0;">Content for tab one.</p>',
       tab2: '<p style="color:#64748b;padding:0.5rem 0;">Content for tab two.</p>',
       tab3: '<p style="color:#64748b;padding:0.5rem 0;">Content for tab three.</p>',
