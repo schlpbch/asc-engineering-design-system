@@ -1,13 +1,13 @@
 ---
 export interface Props {
-  ariaLabel: string;
+  'aria-label': string;
   title?: string;
   className?: string;
   id?: string;
-  ariaPressed?: boolean | 'true' | 'false' | 'mixed';
+  'aria-pressed'?: boolean | 'true' | 'false' | 'mixed';
 }
 
-const { ariaLabel, title, className = '', id, ariaPressed } = Astro.props;
+const { 'aria-label': ariaLabel, title, className = '', id, 'aria-pressed': ariaPressed } = Astro.props;
 ---
 
 <button

@@ -117,7 +117,7 @@ const alertId = props.id || `alert-${Math.random().toString(36).substring(2, 11)
     dismissible && (
       <button
         type="button"
-        class="flex-shrink-0 ml-3 p-1 rounded-md hover:bg-black hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-current"
+        class="flex-shrink-0 ml-3 p-1 rounded-md hover:bg-black hover:bg-opacity-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent focus-visible:ring-current"
         aria-label="Dismiss alert"
         onclick={`document.getElementById('${alertId}').remove()`}
       >
