@@ -92,7 +92,7 @@ const badgeClasses = mergeTailwindClasses(
 );
 
 // Generate unique ID
-const badgeId = props.id || `badge-${Math.random().toString(36).substr(2, 9)}`;
+const badgeId = props.id || `badge-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <span id={badgeId} class={badgeClasses} {...props}>

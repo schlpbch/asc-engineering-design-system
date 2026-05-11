@@ -45,7 +45,7 @@ const baseModalClasses =
 const modalClasses = mergeTailwindClasses(baseModalClasses, sizeClasses[size], className);
 
 // Generate unique ID
-const modalId = props.id || `modal-${Math.random().toString(36).substr(2, 9)}`;
+const modalId = props.id || `modal-${Math.random().toString(36).substring(2, 11)}`;
 const titleId = `${modalId}-title`;
 const descriptionId = description ? `${modalId}-description` : undefined;
 ---

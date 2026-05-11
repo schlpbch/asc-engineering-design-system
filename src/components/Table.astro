@@ -61,7 +61,7 @@ const tdClasses = (header: TableHeader, rowIndex: number) => mergeTailwindClasse
   striped && rowIndex % 2 === 1 ? 'bg-slate-50/50 dark:bg-slate-800/50' : ''
 );
 
-const trClasses = (rowIndex: number) => mergeTailwindClasses(
+const trClasses = () => mergeTailwindClasses(
   'transition-colors',
   hoverable ? 'hover:bg-slate-50 dark:hover:bg-slate-800/50' : ''
 );
@@ -87,7 +87,7 @@ const trClasses = (rowIndex: number) => mergeTailwindClasses(
 
     <tbody class="bg-white dark:bg-slate-900 divide-y divide-slate-100 dark:divide-slate-800">
       {rows.map((row, rowIndex) => (
-        <tr class={trClasses(rowIndex)}>
+        <tr class={trClasses()}>
           {headers.map((header) => (
             <td class={tdClasses(header, rowIndex)} set:html={row[header.key] ?? ''} />
           ))}

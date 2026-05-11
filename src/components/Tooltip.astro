@@ -10,7 +10,7 @@ export interface Props {
 }
 
 const { text, position = 'top', maxWidth = '250px' } = Astro.props;
-const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+const tooltipId = `tooltip-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <div class="tooltip-wrapper inline-block relative">

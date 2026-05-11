@@ -11,7 +11,7 @@ export interface Props {
 }
 
 const { label = 'Filter by:', filters, multiSelect = false, containerClass = '' } = Astro.props;
-const containerId = `filter-container-${Math.random().toString(36).substr(2, 9)}`;
+const containerId = `filter-container-${Math.random().toString(36).substring(2, 11)}`;
 ---
 
 <div

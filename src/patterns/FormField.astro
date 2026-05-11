@@ -48,7 +48,7 @@ const labelWidthClasses = {
 };
 
 // Generate unique ID for accessibility
-const fieldId = props.id || `field-${Math.random().toString(36).substr(2, 9)}`;
+const fieldId = props.id || `field-${Math.random().toString(36).substring(2, 11)}`;
 
 // Computed classes
 const fieldClasses = mergeTailwindClasses(layoutClasses[layout], sizeClasses[size], className);
