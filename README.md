@@ -945,23 +945,6 @@ If you encounter issues not covered here:
 
 ---
 
-## 📝 Changelog
-
-### Version 1.0.0 (January 2026)
-
-**Initial Release**:
-
-- ✅ Complete component library (Button, Input, Card, Alert, Badge, Modal,
-  Stack, FormField)
-- ✅ Design tokens (colors, typography, spacing, shadows)
-- ✅ Dark mode support
-- ✅ WCAG 2.1 AA accessibility compliance
-- ✅ Full TypeScript support
-- ✅ Responsive design patterns
-- ✅ Comprehensive documentation
-
----
-
 ## 🔗 Related Resources
 
 - [ASC Engineering](../../README.md) - Main project documentation
