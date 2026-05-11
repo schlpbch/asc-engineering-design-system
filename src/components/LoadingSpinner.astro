@@ -1,0 +1,25 @@
+---
+export interface Props {
+  message?: string;
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+}
+
+const { message = 'Loading...', size = 'md', className = '' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-4 h-4',
+  md: 'w-8 h-8',
+  lg: 'w-12 h-12',
+};
+---
+
+<div class={`flex items-center justify-center ${className}`}>
+  <div class="text-center">
+    <div
+      class={`animate-spin ${sizeClasses[size]} border-2 border-accent border-t-transparent rounded-full mx-auto mb-2`}
+    >
+    </div>
+    <p class="text-sm text-slate-500">{message}</p>
+  </div>
+</div>

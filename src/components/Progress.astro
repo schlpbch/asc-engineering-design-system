@@ -1,0 +1,85 @@
+---
+import type { BaseProps, IntentProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps, IntentProps {
+  value: number;
+  max?: number;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
+  label?: string;
+  showValue?: boolean;
+  animated?: boolean;
+}
+
+const {
+  value,
+  max = 100,
+  size = 'md',
+  intent = 'primary',
+  label,
+  showValue = false,
+  animated = false,
+  className = '',
+  ...props
+} = Astro.props;
+
+const clampedValue = Math.min(Math.max(0, value), max);
+const percentage = Math.round((clampedValue / max) * 100);
+
+// Size variants (height)
+const sizeClasses = {
+  xs: 'h-1',
+  sm: 'h-2',
+  md: 'h-3',
+  lg: 'h-4',
+};
+
+// Intent bar colors
+const intentColors = {
+  primary: 'bg-accent-500',
+  success: 'bg-green-500',
+  warning: 'bg-amber-500',
+  error: 'bg-red-500',
+  info: 'bg-blue-500',
+  secondary: 'bg-slate-500',
+};
+
+const trackClasses = mergeTailwindClasses(
+  'w-full rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden',
+  sizeClasses[size],
+  className
+);
+
+const barClasses = mergeTailwindClasses(
+  'h-full rounded-full transition-all duration-500 ease-out',
+  intentColors[intent] || intentColors.primary,
+  animated && 'animate-pulse'
+);
+---
+
+<div class="w-full" {...props}>
+  {(label || showValue) && (
+    <div class="flex items-center justify-between mb-1.5">
+      {label && (
+        <span class="text-sm font-medium text-slate-700 dark:text-slate-300">{label}</span>
+      )}
+      {showValue && (
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">{percentage}%</span>
+      )}
+    </div>
+  )}
+
+  <div
+    class={trackClasses}
+    role="progressbar"
+    aria-valuenow={clampedValue}
+    aria-valuemin={0}
+    aria-valuemax={max}
+    aria-label={label || `Progress: ${percentage}%`}
+  >
+    <div
+      class={barClasses}
+      style={`width: ${percentage}%`}
+    />
+  </div>
+</div>

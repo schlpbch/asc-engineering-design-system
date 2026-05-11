@@ -1,0 +1,135 @@
+---
+import type { BaseProps, SizeProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+import Button from './Button.astro';
+
+export interface Props extends BaseProps, SizeProps {
+  open?: boolean;
+  title?: string;
+  description?: string;
+  showCloseButton?: boolean;
+  closeOnBackdropClick?: boolean;
+  closeOnEscape?: boolean;
+}
+
+const {
+  open = false,
+  size = 'md',
+  title,
+  description,
+  showCloseButton = true,
+  closeOnBackdropClick = true,
+  closeOnEscape = true,
+  className = '',
+  ...props
+} = Astro.props;
+
+// Size variants for modal content
+const sizeClasses = {
+  xs: 'max-w-xs',
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+};
+
+// Base overlay classes
+const overlayClasses =
+  'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm';
+
+// Base modal classes
+const baseModalClasses =
+  'relative w-full bg-white dark:bg-slate-900 rounded-lg shadow-xl border border-slate-200 dark:border-slate-700';
+
+// Computed classes
+const modalClasses = mergeTailwindClasses(baseModalClasses, sizeClasses[size], className);
+
+// Generate unique ID
+const modalId = props.id || `modal-${Math.random().toString(36).substr(2, 9)}`;
+const titleId = `${modalId}-title`;
+const descriptionId = description ? `${modalId}-description` : undefined;
+---
+
+{
+  open && (
+    <div
+      id={modalId}
+      class={overlayClasses}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={title ? titleId : undefined}
+      aria-describedby={descriptionId}
+      data-close-on-backdrop={closeOnBackdropClick}
+      data-close-on-escape={closeOnEscape}
+      {...props}
+    >
+      <div class={modalClasses}>
+        {/* Header */}
+        {(title || showCloseButton) && (
+          <div class="flex items-start justify-between p-6 pb-4 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex-1">
+              {title && (
+                <h2 id={titleId} class="text-lg font-semibold text-slate-900 dark:text-white">
+                  {title}
+                </h2>
+              )}
+              {description && (
+                <p id={descriptionId} class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                  {description}
+                </p>
+              )}
+            </div>
+
+            {showCloseButton && (
+              <Button
+                variant="ghost"
+                size="sm"
+                className="p-2 -mr-2 -mt-2"
+                aria-label="Close modal"
+                onclick={`document.getElementById('${modalId}').style.display = 'none'`}
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </Button>
+            )}
+          </div>
+        )}
+
+        {/* Content */}
+        <div class="p-6">
+          <slot />
+        </div>
+
+        {/* Footer */}
+        <slot name="footer" />
+      </div>
+    </div>
+  )
+}
+
+<script>
+  // Handle backdrop clicks
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement | null;
+    const modal = target?.closest('[role="dialog"]') as HTMLElement | null;
+    if (modal && e.target === modal && modal.dataset.closeOnBackdrop === 'true') {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Handle escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const openModal = document.querySelector('[role="dialog"]:not([style*="display: none"])') as HTMLElement | null;
+      if (openModal && openModal.dataset.closeOnEscape === 'true') {
+        openModal.style.display = 'none';
+      }
+    }
+  });
+</script>

@@ -1,0 +1,21 @@
+---
+export interface Props {
+  ariaLabel: string;
+  title?: string;
+  className?: string;
+  id?: string;
+  ariaPressed?: boolean | 'true' | 'false' | 'mixed';
+}
+
+const { ariaLabel, title, className = '', id, ariaPressed } = Astro.props;
+---
+
+<button
+  id={id}
+  class={`p-2 sm:p-2.5 rounded-lg sm:rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${className}`}
+  aria-label={ariaLabel}
+  aria-pressed={ariaPressed}
+  title={title}
+>
+  <slot />
+</button>

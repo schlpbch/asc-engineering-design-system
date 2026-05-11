@@ -1,0 +1,155 @@
+---
+import type { BaseProps, SizeProps, ValidationProps, DisabledProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps, SizeProps, ValidationProps, DisabledProps {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
+  placeholder?: string;
+  value?: string;
+  name?: string;
+  required?: boolean;
+  readonly?: boolean;
+  autoComplete?: string;
+  autoFocus?: boolean;
+  maxLength?: number;
+  minLength?: number;
+  pattern?: string;
+  inputMode?: 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url';
+  'aria-label'?: string;
+  'aria-describedby'?: string;
+  prefix?: boolean;
+  suffix?: boolean;
+}
+
+const {
+  type = 'text',
+  size = 'md',
+  disabled = false,
+  readonly = false,
+  required = false,
+  autoFocus = false,
+  className = '',
+  error,
+  warning,
+  success,
+  hint,
+  prefix = false,
+  suffix = false,
+  ...props
+} = Astro.props;
+
+// Size variants
+const sizeClasses = {
+  xs: 'px-2 py-1 text-xs',
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-3 py-2 text-sm',
+  lg: 'px-4 py-3 text-base',
+  xl: 'px-6 py-4 text-lg',
+};
+
+// State variants
+const stateClasses = {
+  default:
+    'border-slate-300 focus:border-accent-500 focus:ring-accent-500 dark:border-slate-600 dark:focus:border-accent-400',
+  error: 'border-red-300 focus:border-red-500 focus:ring-red-500 dark:border-red-600',
+  warning: 'border-amber-300 focus:border-amber-500 focus:ring-amber-500 dark:border-amber-600',
+  success: 'border-green-300 focus:border-green-500 focus:ring-green-500 dark:border-green-600',
+};
+
+// Determine state
+let currentState: keyof typeof stateClasses = 'default';
+if (error) currentState = 'error';
+else if (warning) currentState = 'warning';
+else if (success) currentState = 'success';
+
+// Base input classes
+const baseClasses =
+  'block w-full rounded-md border bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50 read-only:cursor-not-allowed read-only:bg-slate-50 dark:read-only:bg-slate-800';
+
+// Computed classes
+const inputClasses = mergeTailwindClasses(
+  baseClasses,
+  sizeClasses[size],
+  stateClasses[currentState],
+  prefix && 'pl-10',
+  suffix && 'pr-10',
+  className
+);
+
+// Generate unique ID for accessibility
+const inputId = props.id || `input-${Math.random().toString(36).substring(2, 11)}`;
+const describedBy =
+  [
+    error ? `${inputId}-error` : null,
+    warning ? `${inputId}-warning` : null,
+    success ? `${inputId}-success` : null,
+    hint ? `${inputId}-hint` : null,
+    props['aria-describedby'] ?? null,
+  ]
+    .filter((v): v is string => v !== null)
+    .join(' ') || undefined;
+---
+
+<div class="relative">
+  {
+    prefix && (
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+        <slot name="prefix" />
+      </div>
+    )
+  }
+
+  <input
+    id={inputId}
+    type={type}
+    class={inputClasses}
+    disabled={disabled}
+    readonly={readonly}
+    required={required}
+    autofocus={autoFocus}
+    aria-invalid={error ? 'true' : 'false'}
+    aria-describedby={describedBy}
+    {...props}
+  />
+
+  {
+    suffix && (
+      <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+        <slot name="suffix" />
+      </div>
+    )
+  }
+</div>
+
+{/* Validation Messages */}
+{
+  error && (
+    <p id={`${inputId}-error`} class="mt-1 text-sm text-red-600 dark:text-red-400">
+      {error}
+    </p>
+  )
+}
+
+{
+  warning && !error && (
+    <p id={`${inputId}-warning`} class="mt-1 text-sm text-amber-600 dark:text-amber-400">
+      {warning}
+    </p>
+  )
+}
+
+{
+  success && !error && !warning && (
+    <p id={`${inputId}-success`} class="mt-1 text-sm text-green-600 dark:text-green-400">
+      {success}
+    </p>
+  )
+}
+
+{
+  hint && !error && !warning && !success && (
+    <p id={`${inputId}-hint`} class="mt-1 text-sm text-slate-500 dark:text-slate-400">
+      {hint}
+    </p>
+  )
+}

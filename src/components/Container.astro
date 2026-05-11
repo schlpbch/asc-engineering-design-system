@@ -1,0 +1,58 @@
+---
+import type { BaseProps, SizeProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps, SizeProps {
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl' | '6xl' | 'full';
+  centered?: boolean;
+  padding?: boolean;
+  as?: string;
+}
+
+const {
+  maxWidth = 'xl',
+  size = 'md',
+  centered = true,
+  padding = true,
+  as: Component = 'div',
+  className = '',
+  ...props
+} = Astro.props;
+
+// Max width variants
+const maxWidthClasses = {
+  sm: 'max-w-sm',
+  md: 'max-w-md',
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '2xl': 'max-w-2xl',
+  '4xl': 'max-w-4xl',
+  '6xl': 'max-w-6xl',
+  full: 'max-w-full',
+};
+
+// Padding variants based on size
+const paddingClasses = {
+  xs: 'px-2',
+  sm: 'px-4',
+  md: 'px-6',
+  lg: 'px-8',
+  xl: 'px-12',
+};
+
+// Base container classes
+const baseClasses = 'w-full';
+
+// Computed classes
+const containerClasses = mergeTailwindClasses(
+  baseClasses,
+  maxWidthClasses[maxWidth as keyof typeof maxWidthClasses],
+  centered && 'mx-auto',
+  padding && paddingClasses[size as keyof typeof paddingClasses],
+  className
+);
+---
+
+<Component class={containerClasses} {...props}>
+  <slot />
+</Component>

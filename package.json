@@ -1,0 +1,42 @@
+{
+  "name": "@mcp-orchestrator/design-system",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components/*": "./src/components/*",
+    "./patterns/*": "./src/patterns/*",
+    "./tokens": "./src/tokens/index.ts",
+    "./utils/*": "./src/utils/*"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "astro check",
+    "dev": "tsx src/index.ts",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "astro": ">=6.0.0",
+    "tailwindcss": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "@storybook/addon-docs": "^10.3.6",
+    "@storybook/builder-vite": "^10.3.6",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.1",
+    "storybook": "^10.3.6",
+    "storybook-astro": "^0.2.1",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

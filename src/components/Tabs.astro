@@ -1,0 +1,219 @@
+---
+import type { BaseProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface TabItem {
+  id: string;
+  label: string;
+  disabled?: boolean;
+  badge?: string;
+}
+
+export interface Props extends BaseProps {
+  tabs: TabItem[];
+  activeTab?: string;
+  variant?: 'underline' | 'pills' | 'bordered';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  tabs,
+  activeTab,
+  variant = 'underline',
+  size = 'md',
+  className = '',
+  ...props
+} = Astro.props;
+
+const defaultActiveTab = activeTab || (tabs[0]?.id ?? '');
+
+// Size classes for tab buttons
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-xs',
+  md: 'px-4 py-2 text-sm',
+  lg: 'px-5 py-2.5 text-base',
+};
+
+// Variant-specific wrapper classes
+const wrapperClasses = {
+  underline: 'border-b border-slate-200 dark:border-slate-700',
+  pills: 'bg-slate-100 dark:bg-slate-800 p-1 rounded-lg',
+  bordered: 'border border-slate-200 dark:border-slate-700 rounded-lg p-1 bg-slate-50 dark:bg-slate-900',
+};
+
+// Active tab classes per variant
+const activeTabClasses = {
+  underline: 'border-b-2 border-accent-500 text-accent-600 dark:text-accent-400',
+  pills: 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-sm rounded-md',
+  bordered: 'bg-white dark:bg-slate-800 text-slate-900 dark:text-white shadow-sm rounded-md border border-slate-200 dark:border-slate-600',
+};
+
+// Inactive tab classes per variant
+const inactiveTabClasses = {
+  underline: 'border-b-2 border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-200',
+  pills: 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-md',
+  bordered: 'text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 rounded-md',
+};
+
+const tabsId = props.id || `tabs-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class={mergeTailwindClasses('w-full', className)} data-tabs-id={tabsId} {...props}>
+  <!-- Tab list -->
+  <div class={wrapperClasses[variant]} role="tablist" aria-label="Tabs">
+    <div class={variant === 'underline' ? 'flex gap-0 -mb-px' : 'flex gap-1'}>
+      {tabs.map((tab) => {
+        const isActive = tab.id === defaultActiveTab;
+        const tabClasses = mergeTailwindClasses(
+          'inline-flex items-center gap-1.5 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2 whitespace-nowrap',
+          sizeClasses[size],
+          isActive ? activeTabClasses[variant] : inactiveTabClasses[variant],
+          tab.disabled && 'opacity-50 pointer-events-none cursor-not-allowed'
+        );
+        return (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={isActive}
+            aria-controls={`${tabsId}-panel-${tab.id}`}
+            id={`${tabsId}-tab-${tab.id}`}
+            class={tabClasses}
+            data-tab-target={tab.id}
+            data-tabs-container={tabsId}
+            disabled={tab.disabled}
+            tabindex={isActive ? 0 : -1}
+          >
+            {tab.label}
+            {tab.badge && (
+              <span class="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 text-xs font-medium bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 rounded-full">
+                {tab.badge}
+              </span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  </div>
+
+  <!-- Tab panels -->
+  <div class="mt-4">
+    {tabs.map((tab) => {
+      const isActive = tab.id === defaultActiveTab;
+      return (
+        <div
+          id={`${tabsId}-panel-${tab.id}`}
+          role="tabpanel"
+          aria-labelledby={`${tabsId}-tab-${tab.id}`}
+          class={isActive ? '' : 'hidden'}
+          data-tab-panel={tab.id}
+          data-tabs-container={tabsId}
+          tabindex={0}
+        >
+          <slot name={tab.id} />
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+<script>
+  function initTabs(container: HTMLElement) {
+    const tabsId = container.dataset.tabsId;
+    if (!tabsId) return;
+
+    const tabBtns = container.querySelectorAll<HTMLButtonElement>(`[data-tab-target][data-tabs-container="${tabsId}"]`);
+    const panels = container.querySelectorAll<HTMLElement>(`[data-tab-panel][data-tabs-container="${tabsId}"]`);
+
+    tabBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.tabTarget;
+        if (!targetId) return;
+
+        // Update buttons
+        tabBtns.forEach((b) => {
+          const isTarget = b.dataset.tabTarget === targetId;
+          b.setAttribute('aria-selected', String(isTarget));
+          b.setAttribute('tabindex', isTarget ? '0' : '-1');
+
+          // Swap active/inactive classes based on variant
+          // Detect variant from the wrapper sibling
+          const listWrapper = b.closest('[role="tablist"]')?.parentElement;
+          const hasBorderB = b.classList.contains('border-b-2') || listWrapper?.classList.contains('-mb-px');
+          const hasBg = listWrapper?.classList.contains('bg-slate-100');
+          const hasRoundedBorder = listWrapper?.classList.contains('rounded-lg') && !hasBg;
+
+          // Remove all variant active classes
+          b.classList.remove(
+            'border-b-2', 'border-accent-500', 'text-accent-600', 'dark:text-accent-400',
+            'bg-white', 'dark:bg-slate-700', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'rounded-md',
+            'dark:bg-slate-800', 'border', 'border-slate-200', 'dark:border-slate-600'
+          );
+
+          if (isTarget) {
+            b.classList.remove('border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300', 'dark:text-slate-400', 'dark:hover:text-slate-200');
+          }
+        });
+
+        // Simpler approach: toggle hidden on panels and re-derive active state
+        panels.forEach((panel) => {
+          const isTarget = panel.dataset.tabPanel === targetId;
+          panel.classList.toggle('hidden', !isTarget);
+        });
+
+        // Re-apply active/inactive styles by querying fresh
+        const variant = (() => {
+          const listParent = container.querySelector('[role="tablist"]')?.parentElement;
+          if (listParent?.classList.contains('bg-slate-100')) return 'pills';
+          if (listParent?.classList.contains('bg-slate-50')) return 'bordered';
+          return 'underline';
+        })();
+
+        const activeTabClasses: Record<string, string[]> = {
+          underline: ['border-b-2', 'border-accent-500', 'text-accent-600', 'dark:text-accent-400'],
+          pills: ['bg-white', 'dark:bg-slate-700', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'rounded-md'],
+          bordered: ['bg-white', 'dark:bg-slate-800', 'text-slate-900', 'dark:text-white', 'shadow-sm', 'rounded-md', 'border', 'border-slate-200', 'dark:border-slate-600'],
+        };
+
+        const inactiveTabClasses: Record<string, string[]> = {
+          underline: ['border-b-2', 'border-transparent', 'text-slate-500', 'hover:text-slate-700', 'hover:border-slate-300', 'dark:text-slate-400', 'dark:hover:text-slate-200'],
+          pills: ['text-slate-500', 'hover:text-slate-700', 'dark:text-slate-400', 'dark:hover:text-slate-200', 'rounded-md'],
+          bordered: ['text-slate-500', 'hover:text-slate-700', 'dark:text-slate-400', 'dark:hover:text-slate-200', 'rounded-md'],
+        };
+
+        tabBtns.forEach((b) => {
+          const isTarget = b.dataset.tabTarget === targetId;
+          const addClasses = isTarget ? activeTabClasses[variant] : inactiveTabClasses[variant];
+          const removeClasses = isTarget ? inactiveTabClasses[variant] : activeTabClasses[variant];
+          b.classList.remove(...removeClasses);
+          b.classList.add(...addClasses);
+        });
+      });
+
+      // Keyboard navigation
+      btn.addEventListener('keydown', (e) => {
+        const btnsArr = Array.from(tabBtns).filter((b) => !b.disabled);
+        const idx = btnsArr.indexOf(btn);
+        let next: HTMLButtonElement | undefined;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          next = btnsArr[(idx + 1) % btnsArr.length];
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          next = btnsArr[(idx - 1 + btnsArr.length) % btnsArr.length];
+        } else if (e.key === 'Home') {
+          e.preventDefault();
+          next = btnsArr[0];
+        } else if (e.key === 'End') {
+          e.preventDefault();
+          next = btnsArr[btnsArr.length - 1];
+        }
+        if (next) {
+          next.focus();
+          next.click();
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tabs-id]').forEach(initTabs);
+</script>

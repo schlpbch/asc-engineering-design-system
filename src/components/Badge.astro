@@ -1,0 +1,122 @@
+---
+import type { BaseProps, SizeProps, IntentProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps, SizeProps, IntentProps {
+  variant?: 'default' | 'outline' | 'filled' | 'dot';
+  shape?: 'rounded' | 'pill';
+  removable?: boolean;
+}
+
+const {
+  variant = 'default',
+  size = 'md',
+  intent = 'secondary',
+  shape = 'rounded',
+  removable = false,
+  className = '',
+  ...props
+} = Astro.props;
+
+// Size variants
+const sizeClasses = {
+  xs: 'px-1.5 py-0.5 text-xs gap-1',
+  sm: 'px-2 py-0.5 text-xs gap-1',
+  md: 'px-2.5 py-0.5 text-sm gap-1.5',
+  lg: 'px-3 py-1 text-sm gap-2',
+  xl: 'px-4 py-1.5 text-base gap-2',
+};
+
+// Shape variants
+const shapeClasses = {
+  rounded: 'rounded',
+  pill: 'rounded-full',
+};
+
+// Intent + Variant combinations
+const intentVariants = {
+  default: {
+    primary: 'bg-accent-100 text-accent-700 dark:bg-accent-900 dark:text-accent-300',
+    secondary: 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300',
+    success: 'bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300',
+    warning: 'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
+    error: 'bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300',
+    info: 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300',
+  },
+  outline: {
+    primary: 'border border-accent-200 text-accent-600 dark:border-accent-700 dark:text-accent-400',
+    secondary: 'border border-slate-200 text-slate-600 dark:border-slate-700 dark:text-slate-400',
+    success: 'border border-green-200 text-green-600 dark:border-green-700 dark:text-green-400',
+    warning: 'border border-amber-200 text-amber-600 dark:border-amber-700 dark:text-amber-400',
+    error: 'border border-red-200 text-red-600 dark:border-red-700 dark:text-red-400',
+    info: 'border border-blue-200 text-blue-600 dark:border-blue-700 dark:text-blue-400',
+  },
+  filled: {
+    primary: 'bg-accent-500 text-white',
+    secondary: 'bg-slate-500 text-white',
+    success: 'bg-green-500 text-white',
+    warning: 'bg-amber-500 text-white',
+    error: 'bg-red-500 text-white',
+    info: 'bg-blue-500 text-white',
+  },
+  dot: {
+    primary: 'bg-transparent text-accent-600 dark:text-accent-400',
+    secondary: 'bg-transparent text-slate-600 dark:text-slate-400',
+    success: 'bg-transparent text-green-600 dark:text-green-400',
+    warning: 'bg-transparent text-amber-600 dark:text-amber-400',
+    error: 'bg-transparent text-red-600 dark:text-red-400',
+    info: 'bg-transparent text-blue-600 dark:text-blue-400',
+  },
+};
+
+// Dot colors for dot variant
+const dotColors = {
+  primary: 'bg-accent-500',
+  secondary: 'bg-slate-500',
+  success: 'bg-green-500',
+  warning: 'bg-amber-500',
+  error: 'bg-red-500',
+  info: 'bg-blue-500',
+};
+
+// Base badge classes
+const baseClasses = 'inline-flex items-center font-medium';
+
+// Computed classes
+const badgeClasses = mergeTailwindClasses(
+  baseClasses,
+  sizeClasses[size],
+  shapeClasses[shape],
+  intentVariants[variant][intent],
+  className
+);
+
+// Generate unique ID
+const badgeId = props.id || `badge-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<span id={badgeId} class={badgeClasses} {...props}>
+  {variant === 'dot' && <span class={`w-2 h-2 rounded-full ${dotColors[intent]}`} />}
+
+  <slot />
+
+  {
+    removable && (
+      <button
+        type="button"
+        class="ml-1 p-0.5 rounded-full hover:bg-black hover:bg-opacity-10 focus:outline-none focus:ring-1 focus:ring-current"
+        aria-label="Remove badge"
+        onclick={`document.getElementById('${badgeId}').remove()`}
+      >
+        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    )
+  }
+</span>

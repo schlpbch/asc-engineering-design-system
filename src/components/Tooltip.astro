@@ -1,0 +1,169 @@
+---
+/**
+ * Reusable tooltip component with help icon
+ * Shows explanatory text on hover/click
+ */
+export interface Props {
+  text: string;
+  position?: 'top' | 'bottom' | 'left' | 'right';
+  maxWidth?: string;
+}
+
+const { text, position = 'top', maxWidth = '250px' } = Astro.props;
+const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div class="tooltip-wrapper inline-block relative">
+  <button
+    type="button"
+    class="tooltip-trigger p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+    aria-label="Show help"
+    aria-describedby={tooltipId}
+    data-tooltip-trigger
+  >
+    <svg
+      class="w-4 h-4 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+  </button>
+
+  <div
+    id={tooltipId}
+    role="tooltip"
+    class="tooltip-content hidden absolute z-50 px-3 py-2 text-xs font-medium text-white bg-slate-900 dark:bg-slate-700 rounded-lg shadow-lg"
+    style={`max-width: ${maxWidth};`}
+    data-tooltip-content
+    data-position={position}
+  >
+    {text}
+    <div class="tooltip-arrow" data-popper-arrow></div>
+  </div>
+</div>
+
+<style>
+  .tooltip-content {
+    white-space: normal;
+    word-wrap: break-word;
+  }
+
+  .tooltip-content[data-position='top'] {
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tooltip-content[data-position='bottom'] {
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .tooltip-content[data-position='left'] {
+    right: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .tooltip-content[data-position='right'] {
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .tooltip-arrow {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    transform: rotate(45deg);
+  }
+
+  [data-position='top'] .tooltip-arrow {
+    bottom: -4px;
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  [data-position='bottom'] .tooltip-arrow {
+    top: -4px;
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  [data-position='left'] .tooltip-arrow {
+    right: -4px;
+    top: 50%;
+    margin-top: -4px;
+  }
+
+  [data-position='right'] .tooltip-arrow {
+    left: -4px;
+    top: 50%;
+    margin-top: -4px;
+  }
+</style>
+
+<script>
+  // Initialize tooltips on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    const triggers = document.querySelectorAll('[data-tooltip-trigger]');
+
+    triggers.forEach((trigger) => {
+      const wrapper = trigger.closest('.tooltip-wrapper');
+      const content = wrapper?.querySelector('[data-tooltip-content]');
+
+      if (!content) return;
+
+      let hideTimeout: number;
+
+      // Show on hover
+      trigger.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        content.classList.remove('hidden');
+      });
+
+      // Hide on mouse leave
+      trigger.addEventListener('mouseleave', () => {
+        hideTimeout = window.setTimeout(() => {
+          content.classList.add('hidden');
+        }, 200);
+      });
+
+      // Toggle on click (for mobile)
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        content.classList.toggle('hidden');
+      });
+
+      // Keep tooltip visible when hovering over it
+      content.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+      });
+
+      content.addEventListener('mouseleave', () => {
+        hideTimeout = window.setTimeout(() => {
+          content.classList.add('hidden');
+        }, 200);
+      });
+    });
+
+    // Hide all tooltips when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.tooltip-wrapper')) {
+        document.querySelectorAll('[data-tooltip-content]').forEach((tooltip) => {
+          tooltip.classList.add('hidden');
+        });
+      }
+    });
+  });
+</script>

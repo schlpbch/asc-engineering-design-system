@@ -1,0 +1,92 @@
+---
+import type { BaseProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps {
+  variant?: 'default' | 'minimal' | 'dark';
+  maxWidth?: 'lg' | 'xl' | '4xl' | '6xl' | 'full';
+  copyright?: string;
+}
+
+const {
+  variant = 'default',
+  maxWidth = '6xl',
+  copyright,
+  className = '',
+  ...props
+} = Astro.props;
+
+const maxWidthClasses = {
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '4xl': 'max-w-4xl',
+  '6xl': 'max-w-6xl',
+  full: 'max-w-full',
+};
+
+const variantClasses = {
+  default: 'bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800',
+  minimal: 'bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800',
+  dark: 'bg-slate-900 border-t border-slate-800',
+};
+
+const textClasses = {
+  default: 'text-slate-500 dark:text-slate-400',
+  minimal: 'text-slate-500 dark:text-slate-400',
+  dark: 'text-slate-400',
+};
+
+const footerClasses = mergeTailwindClasses('w-full', variantClasses[variant], className);
+const innerClasses = `${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-6`;
+const textClass = textClasses[variant];
+---
+
+<footer class={footerClasses} {...props}>
+  {variant === 'minimal' ? (
+    /* ── Minimal: single row ── */
+    <div class={innerClasses}>
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 py-4">
+        <div class="flex items-center gap-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+          <slot name="brand" />
+        </div>
+        {copyright && (
+          <p class={`text-xs ${textClass}`}>{copyright}</p>
+        )}
+        <nav class={`flex items-center gap-4 text-xs ${textClass}`} aria-label="Footer navigation">
+          <slot name="bottom" />
+        </nav>
+      </div>
+    </div>
+  ) : (
+    /* ── Default / Dark: full layout ── */
+    <div class={innerClasses}>
+      {/* Top section */}
+      <div class="py-10 grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10">
+        {/* Brand column */}
+        <div class="flex flex-col gap-4">
+          <div class={`text-sm font-semibold ${variant === 'dark' ? 'text-white' : 'text-slate-900 dark:text-white'}`}>
+            <slot name="brand" />
+          </div>
+        </div>
+
+        {/* Link columns */}
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+          <slot name="columns" />
+        </div>
+      </div>
+
+      {/* Divider */}
+      <hr class={variant === 'dark' ? 'border-slate-800' : 'border-slate-200 dark:border-slate-800'} />
+
+      {/* Bottom strip */}
+      <div class="py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+        {copyright && (
+          <p class={`text-xs ${textClass}`}>{copyright}</p>
+        )}
+        <nav class={`flex items-center gap-4 text-xs ${textClass}`} aria-label="Footer links">
+          <slot name="bottom" />
+        </nav>
+      </div>
+    </div>
+  )}
+</footer>

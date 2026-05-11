@@ -1,0 +1,222 @@
+---
+import type { BaseProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps {
+  label?: string;
+  variant?: 'default' | 'ghost' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  align?: 'left' | 'right';
+}
+
+const {
+  label,
+  variant = 'default',
+  size = 'md',
+  align = 'left',
+  className = '',
+  ...props
+} = Astro.props;
+
+const dropdownId = props.id || `dropdown-${Math.random().toString(36).substr(2, 9)}`;
+
+// Size classes for trigger button
+const sizeClasses = {
+  sm: 'px-3 py-1.5 text-sm gap-1.5',
+  md: 'px-4 py-2 text-sm gap-2',
+  lg: 'px-5 py-2.5 text-base gap-2',
+};
+
+// Variant classes for trigger button
+const variantClasses = {
+  default: 'bg-accent-500 hover:bg-accent-600 text-white border border-transparent',
+  ghost: 'bg-transparent hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-transparent',
+  outline: 'bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-600',
+};
+
+// Menu alignment
+const menuAlignClasses = {
+  left: 'left-0',
+  right: 'right-0',
+};
+
+const triggerClasses = mergeTailwindClasses(
+  'inline-flex items-center justify-center font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500',
+  sizeClasses[size],
+  variantClasses[variant]
+);
+
+const menuClasses = mergeTailwindClasses(
+  'absolute top-full mt-1 z-50 min-w-40 bg-white dark:bg-slate-900 rounded-lg shadow-lg border border-slate-200 dark:border-slate-700 py-1',
+  menuAlignClasses[align]
+);
+---
+
+<div
+  class={mergeTailwindClasses('relative inline-block', className)}
+  data-dropdown-id={dropdownId}
+  {...props}
+>
+  <!-- Trigger slot or default button -->
+  {Astro.slots.has('trigger') ? (
+    <div
+      data-dropdown-trigger={dropdownId}
+      class="cursor-pointer"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls={`${dropdownId}-menu`}
+    >
+      <slot name="trigger" />
+    </div>
+  ) : (
+    <button
+      type="button"
+      class={triggerClasses}
+      data-dropdown-trigger={dropdownId}
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls={`${dropdownId}-menu`}
+    >
+      {label}
+      <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </button>
+  )}
+
+  <!-- Menu -->
+  <div
+    id={`${dropdownId}-menu`}
+    class={mergeTailwindClasses(menuClasses, 'hidden')}
+    role="menu"
+    aria-labelledby={`${dropdownId}-trigger`}
+  >
+    <slot />
+  </div>
+</div>
+
+<style>
+  /* Dropdown item base styles — applied via global so slot content picks them up */
+  [data-dropdown-id] [role="menu"] a,
+  [data-dropdown-id] [role="menu"] button:not([data-dropdown-trigger]) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    color: #334155;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.15s;
+    white-space: nowrap;
+  }
+
+  [data-dropdown-id] [role="menu"] a:hover,
+  [data-dropdown-id] [role="menu"] button:not([data-dropdown-trigger]):hover {
+    background-color: #f1f5f9;
+  }
+
+  [data-dropdown-id] [role="menu"] a:focus,
+  [data-dropdown-id] [role="menu"] button:not([data-dropdown-trigger]):focus {
+    outline: 2px solid #14b8a6;
+    outline-offset: -2px;
+    background-color: #f1f5f9;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    [data-dropdown-id] [role="menu"] a,
+    [data-dropdown-id] [role="menu"] button:not([data-dropdown-trigger]) {
+      color: #cbd5e1;
+    }
+
+    [data-dropdown-id] [role="menu"] a:hover,
+    [data-dropdown-id] [role="menu"] button:not([data-dropdown-trigger]):hover {
+      background-color: #1e293b;
+    }
+  }
+</style>
+
+<script>
+  function initDropdown(container: HTMLElement) {
+    const dropdownId = container.dataset.dropdownId;
+    if (!dropdownId) return;
+
+    const trigger = container.querySelector<HTMLElement>(`[data-dropdown-trigger="${dropdownId}"]`);
+    const menu = container.querySelector<HTMLElement>(`#${dropdownId}-menu`);
+    if (!trigger || !menu) return;
+
+    let isOpen = false;
+
+    function open() {
+      isOpen = true;
+      menu!.classList.remove('hidden');
+      trigger!.setAttribute('aria-expanded', 'true');
+      // Rotate chevron
+      const chevron = trigger!.querySelector('svg');
+      if (chevron) chevron.style.transform = 'rotate(180deg)';
+      // Focus first item
+      const firstItem = menu!.querySelector<HTMLElement>('a, button:not([data-dropdown-trigger])');
+      firstItem?.focus();
+    }
+
+    function close() {
+      isOpen = false;
+      menu!.classList.add('hidden');
+      trigger!.setAttribute('aria-expanded', 'false');
+      const chevron = trigger!.querySelector('svg');
+      if (chevron) chevron.style.transform = '';
+    }
+
+    function toggle() {
+      isOpen ? close() : open();
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggle();
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target as Node)) {
+        close();
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        close();
+        trigger!.focus();
+      }
+    });
+
+    // Keyboard navigation within menu
+    menu.addEventListener('keydown', (e) => {
+      const items = Array.from(menu!.querySelectorAll<HTMLElement>('a, button:not([disabled])'));
+      const current = document.activeElement as HTMLElement;
+      const idx = items.indexOf(current);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        items[(idx + 1) % items.length]?.focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        items[(idx - 1 + items.length) % items.length]?.focus();
+      } else if (e.key === 'Tab') {
+        close();
+      }
+    });
+
+    // Close menu items on click
+    menu.addEventListener('click', () => {
+      close();
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-dropdown-id]').forEach(initDropdown);
+</script>

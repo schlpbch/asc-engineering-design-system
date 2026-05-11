@@ -1,0 +1,135 @@
+---
+import type { BaseProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps {
+  variant?: 'default' | 'transparent' | 'filled';
+  sticky?: boolean;
+  maxWidth?: 'lg' | 'xl' | '4xl' | '6xl' | 'full';
+}
+
+const {
+  variant = 'default',
+  sticky = false,
+  maxWidth = '6xl',
+  className = '',
+  ...props
+} = Astro.props;
+
+const maxWidthClasses = {
+  lg: 'max-w-lg',
+  xl: 'max-w-xl',
+  '4xl': 'max-w-4xl',
+  '6xl': 'max-w-6xl',
+  full: 'max-w-full',
+};
+
+const variantClasses = {
+  default: 'bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800',
+  transparent: 'bg-transparent border-b border-transparent',
+  filled: 'bg-accent-700 border-b border-accent-800',
+};
+
+const stickyClasses = sticky
+  ? 'sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slate-900/80'
+  : '';
+
+const headerClasses = mergeTailwindClasses(
+  'w-full',
+  sticky ? stickyClasses : variantClasses[variant],
+  !sticky && variant === 'default' ? variantClasses.default : '',
+  !sticky && variant === 'transparent' ? variantClasses.transparent : '',
+  !sticky && variant === 'filled' ? variantClasses.filled : '',
+  className
+);
+
+const textColorClass = variant === 'filled' ? 'text-white' : 'text-slate-900 dark:text-white';
+const navColorClass =
+  variant === 'filled'
+    ? 'text-accent-100 hover:text-white'
+    : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white';
+
+const menuId = `header-menu-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<header class={headerClasses} {...props}>
+  <div class={`${maxWidthClasses[maxWidth]} mx-auto px-4 sm:px-6`}>
+    <div class="flex items-center justify-between h-16">
+
+      {/* Logo */}
+      <div class={`flex items-center gap-3 font-semibold text-lg shrink-0 ${textColorClass}`}>
+        <slot name="logo" />
+      </div>
+
+      {/* Desktop nav */}
+      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        <slot name="nav" />
+      </nav>
+
+      {/* Desktop actions */}
+      <div class="hidden md:flex items-center gap-2">
+        <slot name="actions" />
+      </div>
+
+      {/* Mobile hamburger */}
+      <button
+        type="button"
+        class={`md:hidden p-2 rounded-lg transition-colors ${
+          variant === 'filled'
+            ? 'text-accent-100 hover:text-white hover:bg-accent-600'
+            : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
+        }`}
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls={menuId}
+        data-header-toggle
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            data-icon-open
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          />
+          <path
+            data-icon-close
+            class="hidden"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile menu */}
+  <div
+    id={menuId}
+    class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900"
+    data-header-menu
+  >
+    <div class="px-4 py-3 space-y-1">
+      <div class={navColorClass}>
+        <slot name="mobile-menu" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.querySelector('[data-header-toggle]') as HTMLButtonElement | null;
+  const menu = document.querySelector('[data-header-menu]') as HTMLElement | null;
+  const iconOpen = toggleBtn?.querySelector('[data-icon-open]');
+  const iconClose = toggleBtn?.querySelector('[data-icon-close]');
+
+  toggleBtn?.addEventListener('click', () => {
+    const isOpen = menu?.classList.contains('hidden') === false;
+    menu?.classList.toggle('hidden', isOpen);
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+    iconOpen?.classList.toggle('hidden', !isOpen);
+    iconClose?.classList.toggle('hidden', isOpen);
+  });
+</script>

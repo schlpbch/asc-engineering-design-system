@@ -1,0 +1,135 @@
+---
+import type { BaseProps, SizeProps, IntentProps } from '../utils/types';
+import { mergeTailwindClasses } from '../utils/cn';
+
+export interface Props extends BaseProps, SizeProps, IntentProps {
+  variant?: 'default' | 'filled' | 'outlined';
+  dismissible?: boolean;
+  title?: string;
+  icon?: boolean;
+}
+
+const {
+  variant = 'default',
+  size = 'md',
+  intent = 'info',
+  dismissible = false,
+  title,
+  icon = true,
+  className = '',
+  ...props
+} = Astro.props;
+
+// Size variants
+const sizeClasses = {
+  xs: 'p-2 text-xs gap-2',
+  sm: 'p-3 text-sm gap-2',
+  md: 'p-4 text-sm gap-3',
+  lg: 'p-6 text-base gap-4',
+  xl: 'p-8 text-lg gap-5',
+};
+
+// Intent + Variant combinations
+const intentVariants = {
+  default: {
+    primary:
+      'bg-accent-50 border-accent-200 text-accent-800 dark:bg-accent-950 dark:border-accent-800 dark:text-accent-200',
+    secondary:
+      'bg-slate-50 border-slate-200 text-slate-800 dark:bg-slate-950 dark:border-slate-800 dark:text-slate-200',
+    success:
+      'bg-green-50 border-green-200 text-green-800 dark:bg-green-950 dark:border-green-800 dark:text-green-200',
+    warning:
+      'bg-amber-50 border-amber-200 text-amber-800 dark:bg-amber-950 dark:border-amber-800 dark:text-amber-200',
+    error:
+      'bg-red-50 border-red-200 text-red-800 dark:bg-red-950 dark:border-red-800 dark:text-red-200',
+    info: 'bg-blue-50 border-blue-200 text-blue-800 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200',
+  },
+  filled: {
+    primary: 'bg-accent-500 border-accent-500 text-white',
+    secondary: 'bg-slate-500 border-slate-500 text-white',
+    success: 'bg-green-500 border-green-500 text-white',
+    warning: 'bg-amber-500 border-amber-500 text-white',
+    error: 'bg-red-500 border-red-500 text-white',
+    info: 'bg-blue-500 border-blue-500 text-white',
+  },
+  outlined: {
+    primary: 'bg-transparent border-accent-500 text-accent-600 dark:text-accent-400',
+    secondary:
+      'bg-transparent border-slate-300 text-slate-600 dark:border-slate-600 dark:text-slate-400',
+    success: 'bg-transparent border-green-500 text-green-600 dark:text-green-400',
+    warning: 'bg-transparent border-amber-500 text-amber-600 dark:text-amber-400',
+    error: 'bg-transparent border-red-500 text-red-600 dark:text-red-400',
+    info: 'bg-transparent border-blue-500 text-blue-600 dark:text-blue-400',
+  },
+};
+
+// Icon configurations
+const iconConfig = {
+  primary: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  secondary: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+  success: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  warning:
+    'M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z',
+  error: 'M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z',
+  info: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+};
+
+// Base alert classes
+const baseClasses = 'flex rounded-lg border';
+
+// Computed classes
+const alertClasses = mergeTailwindClasses(
+  baseClasses,
+  sizeClasses[size],
+  intentVariants[variant][intent],
+  className
+);
+
+// Generate unique ID for accessibility
+const alertId = props.id || `alert-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div id={alertId} class={alertClasses} role="alert" aria-live="polite" {...props}>
+  {
+    icon && (
+      <div class="flex-shrink-0">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d={iconConfig[intent]}
+          />
+        </svg>
+      </div>
+    )
+  }
+
+  <div class="flex-1 min-w-0">
+    {title && <h4 class="font-medium mb-1">{title}</h4>}
+
+    <div class={title ? '' : 'flex items-center'}>
+      <slot />
+    </div>
+  </div>
+
+  {
+    dismissible && (
+      <button
+        type="button"
+        class="flex-shrink-0 ml-3 p-1 rounded-md hover:bg-black hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent focus:ring-current"
+        aria-label="Dismiss alert"
+        onclick={`document.getElementById('${alertId}').remove()`}
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    )
+  }
+</div>
