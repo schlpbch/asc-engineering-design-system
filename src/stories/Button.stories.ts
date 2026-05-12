@@ -10,19 +10,40 @@ const meta = {
     variant: {
       control: 'select',
       options: ['solid', 'outline', 'ghost', 'link'],
+      description: 'Visual style of the button.',
+      table: { defaultValue: { summary: 'solid' } },
     },
     intent: {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'warning', 'error', 'info'],
+      description: 'Semantic color intent conveying purpose or severity.',
+      table: { defaultValue: { summary: 'primary' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Controls padding and font size.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    loading: { control: 'boolean' },
-    disabled: { control: 'boolean' },
-    fullWidth: { control: 'boolean' },
-    loadingText: { control: 'text' },
+    loading: {
+      control: 'boolean',
+      description: 'Shows a spinner and disables pointer events while true.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Prevents interaction and reduces opacity.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    fullWidth: {
+      control: 'boolean',
+      description: 'Stretches the button to fill its container.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    loadingText: {
+      control: 'text',
+      description: 'Text shown beside the spinner when loading is true.',
+    },
   },
 };
 

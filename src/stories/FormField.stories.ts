@@ -11,17 +11,41 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    label: { control: 'text' },
-    description: { control: 'text' },
-    required: { control: 'boolean' },
+    label: {
+      control: 'text',
+      description: 'Visible label associated with the field via `for`/`id`.',
+    },
+    description: {
+      control: 'text',
+      description: 'Secondary description shown below the label, above the field.',
+    },
+    required: {
+      control: 'boolean',
+      description: 'Appends a required indicator (*) to the label.',
+      table: { defaultValue: { summary: 'false' } },
+    },
     layout: {
       control: 'select',
       options: ['vertical', 'horizontal'],
+      description: 'Stack direction: `vertical` puts label above the field, `horizontal` places it to the left.',
+      table: { defaultValue: { summary: 'vertical' } },
     },
-    error: { control: 'text' },
-    warning: { control: 'text' },
-    success: { control: 'text' },
-    hint: { control: 'text' },
+    error: {
+      control: 'text',
+      description: 'Validation error message shown below the field.',
+    },
+    warning: {
+      control: 'text',
+      description: 'Warning message shown below the field.',
+    },
+    success: {
+      control: 'text',
+      description: 'Success confirmation shown below the field.',
+    },
+    hint: {
+      control: 'text',
+      description: 'Neutral helper text shown when no validation message is present.',
+    },
   },
 };
 

@@ -15,9 +15,18 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    ariaLabel: { control: 'text' },
-    title: { control: 'text' },
-    ariaPressed: { control: 'text' },
+    ariaLabel: {
+      control: 'text',
+      description: 'Accessible label for screen readers. Required since the button has no visible text.',
+    },
+    title: {
+      control: 'text',
+      description: 'Tooltip shown on hover (native browser tooltip).',
+    },
+    ariaPressed: {
+      control: 'text',
+      description: 'Set to `"true"` or `"false"` to mark the button as a toggle with pressed state.',
+    },
   },
 };
 

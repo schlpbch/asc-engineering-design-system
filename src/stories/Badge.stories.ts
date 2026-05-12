@@ -10,20 +10,32 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'outline', 'filled', 'dot'],
+      description: 'Visual style. `dot` prepends a colored indicator dot.',
+      table: { defaultValue: { summary: 'default' } },
     },
     intent: {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'warning', 'error', 'info'],
+      description: 'Semantic color intent.',
+      table: { defaultValue: { summary: 'primary' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Controls padding and font size.',
+      table: { defaultValue: { summary: 'md' } },
     },
     shape: {
       control: 'select',
       options: ['rounded', 'pill'],
+      description: 'Border-radius style.',
+      table: { defaultValue: { summary: 'rounded' } },
     },
-    removable: { control: 'boolean' },
+    removable: {
+      control: 'boolean',
+      description: 'Renders an × button for removing the badge (e.g. filter tags).',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

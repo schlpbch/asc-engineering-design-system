@@ -10,18 +10,45 @@ const meta = {
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Font size and padding of the textarea.',
+      table: { defaultValue: { summary: 'md' } },
     },
     resize: {
       control: 'select',
       options: ['none', 'vertical', 'horizontal', 'both'],
+      description: 'CSS resize handle direction.',
+      table: { defaultValue: { summary: 'vertical' } },
     },
-    rows: { control: { type: 'number', min: 1, max: 20 } },
-    placeholder: { control: 'text' },
-    disabled: { control: 'boolean' },
-    error: { control: 'text' },
-    warning: { control: 'text' },
-    success: { control: 'text' },
-    hint: { control: 'text' },
+    rows: {
+      control: { type: 'number', min: 1, max: 20 },
+      description: 'Initial visible row count.',
+      table: { defaultValue: { summary: '3' } },
+    },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown when the field is empty.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Prevents interaction and reduces opacity.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    error: {
+      control: 'text',
+      description: 'Error message shown below the textarea with red styling.',
+    },
+    warning: {
+      control: 'text',
+      description: 'Warning message shown below the textarea with amber styling.',
+    },
+    success: {
+      control: 'text',
+      description: 'Success message shown below the textarea with green styling.',
+    },
+    hint: {
+      control: 'text',
+      description: 'Neutral helper text shown when no validation message is present.',
+    },
   },
 };
 

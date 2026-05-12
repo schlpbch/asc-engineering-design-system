@@ -9,7 +9,10 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    title: { control: 'text' },
+    title: {
+      control: 'text',
+      description: 'Section heading text.',
+    },
   },
 };
 

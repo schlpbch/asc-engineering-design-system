@@ -10,17 +10,40 @@ const meta = {
     type: {
       control: 'select',
       options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search'],
+      description: 'HTML input type, affects keyboard on mobile and browser validation.',
+      table: { defaultValue: { summary: 'text' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Height and font size of the input field.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    placeholder: { control: 'text' },
-    disabled: { control: 'boolean' },
-    error: { control: 'text' },
-    warning: { control: 'text' },
-    success: { control: 'text' },
-    hint: { control: 'text' },
+    placeholder: {
+      control: 'text',
+      description: 'Placeholder text shown when the field is empty.',
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Prevents interaction and reduces opacity.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    error: {
+      control: 'text',
+      description: 'Error message shown below the input with red styling. Mutually exclusive with warning/success.',
+    },
+    warning: {
+      control: 'text',
+      description: 'Warning message shown below the input with amber styling.',
+    },
+    success: {
+      control: 'text',
+      description: 'Success message shown below the input with green styling.',
+    },
+    hint: {
+      control: 'text',
+      description: 'Neutral helper text shown below the input when no validation message is present.',
+    },
   },
 };
 

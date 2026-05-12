@@ -10,18 +10,32 @@ const meta = {
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Diameter of the avatar.',
+      table: { defaultValue: { summary: 'md' } },
     },
     shape: {
       control: 'select',
       options: ['circle', 'rounded'],
+      description: 'Border-radius style.',
+      table: { defaultValue: { summary: 'circle' } },
     },
     status: {
       control: 'select',
       options: ['online', 'offline', 'busy', 'away'],
+      description: 'Presence indicator badge shown at the bottom-right.',
     },
-    src: { control: 'text' },
-    alt: { control: 'text' },
-    initials: { control: 'text' },
+    src: {
+      control: 'text',
+      description: 'URL of the avatar image. Takes precedence over initials.',
+    },
+    alt: {
+      control: 'text',
+      description: 'Accessible alternative text for the image.',
+    },
+    initials: {
+      control: 'text',
+      description: 'Fallback text (1–2 characters) shown when no image is provided.',
+    },
   },
 };
 

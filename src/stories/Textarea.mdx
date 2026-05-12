@@ -1,0 +1,36 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Textarea.stories';
+
+<Meta of={Stories} />
+
+# Textarea
+
+A multi-line text field with validation states, optional hint text, and configurable resize behavior.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Validation states
+
+<Canvas of={Stories.WithError} />
+<Canvas of={Stories.WithHint} />
+
+## Resize
+
+<Canvas of={Stories.NoResize} />
+
+## Disabled
+
+<Canvas of={Stories.Disabled} />
+
+## Sizes
+
+<Canvas of={Stories.Large} />
+
+## Accessibility
+
+- Always associate a `<label>` using `FormField`.
+- Validation messages use `aria-describedby` to link to the field.
+- `disabled` removes the field from the tab order.

@@ -1,0 +1,30 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './PageSection.stories';
+
+<Meta of={Stories} />
+
+# PageSection
+
+A page-level content section with a heading, optional subtitle, and configurable padding. Used to divide long pages into scannable, labeled blocks.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## With subtitle
+
+<Canvas of={Stories.WithSubtitle} />
+
+## With border
+
+<Canvas of={Stories.WithBorder} />
+
+## Custom padding
+
+<Canvas of={Stories.CustomPadding} />
+
+## Accessibility
+
+- The section heading renders as `<h2>` — adjust the heading level in context to maintain correct document outline.
+- Use descriptive titles so screen reader users can navigate by headings.

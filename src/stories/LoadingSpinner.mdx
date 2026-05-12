@@ -1,0 +1,28 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './LoadingSpinner.stories';
+
+<Meta of={Stories} />
+
+# LoadingSpinner
+
+An animated ring indicating that an async operation is in progress. Used inline inside buttons (via `Button`'s `loading` prop) or standalone for page/section loading states.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Sizes
+
+<Canvas of={Stories.Small} />
+<Canvas of={Stories.Large} />
+
+## Without message
+
+<Canvas of={Stories.NoMessage} />
+
+## Accessibility
+
+- The spinner has `role="status"` and `aria-live="polite"` so screen readers announce when loading begins.
+- Pass a descriptive `message` to give context (e.g. "Loading projects…").
+- Passing an empty `message` renders the spinner visually only; ensure surrounding context still communicates the loading state.

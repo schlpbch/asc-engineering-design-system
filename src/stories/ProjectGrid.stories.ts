@@ -39,10 +39,24 @@ const meta = {
     layout: 'fullscreen',
   },
   argTypes: {
-    title: { control: 'text' },
-    border: { control: 'boolean' },
-    featured: { control: 'boolean' },
-    viewAllHref: { control: 'text' },
+    title: {
+      control: 'text',
+      description: 'Section heading above the project cards.',
+    },
+    border: {
+      control: 'boolean',
+      description: 'Adds a top border to the section.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    featured: {
+      control: 'boolean',
+      description: 'Uses a 2-column featured layout instead of the standard grid.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    viewAllHref: {
+      control: 'text',
+      description: 'URL for a "View all" link shown in the section header. Omit to hide.',
+    },
   },
 };
 

@@ -10,18 +10,35 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'filled', 'outlined'],
+      description: 'Visual style of the alert container.',
+      table: { defaultValue: { summary: 'default' } },
     },
     intent: {
       control: 'select',
       options: ['primary', 'secondary', 'success', 'warning', 'error', 'info'],
+      description: 'Semantic color intent conveying the nature of the message.',
+      table: { defaultValue: { summary: 'info' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Controls padding and font size.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    title: { control: 'text' },
-    icon: { control: 'boolean' },
-    dismissible: { control: 'boolean' },
+    title: {
+      control: 'text',
+      description: 'Optional bold heading displayed above the message body.',
+    },
+    icon: {
+      control: 'boolean',
+      description: 'Whether to show a semantic icon matching the intent.',
+      table: { defaultValue: { summary: 'true' } },
+    },
+    dismissible: {
+      control: 'boolean',
+      description: 'Renders an × button that hides the alert when clicked.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

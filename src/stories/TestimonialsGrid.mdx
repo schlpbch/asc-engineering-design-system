@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './TestimonialsGrid.stories';
+
+<Meta of={Stories} />
+
+# TestimonialsGrid
+
+A grid of testimonial cards showing a quote, author name, title, and company.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Single testimonial
+
+<Canvas of={Stories.Single} />
+
+## Custom title
+
+<Canvas of={Stories.WithCustomTitle} />
+
+## Testimonial data shape
+
+```ts
+type Testimonial = {
+  quote: string;
+  author: string;
+  title: string;
+  company: string;
+};
+```
+
+## Accessibility
+
+- Quotes are wrapped in `<blockquote>`.
+- Author attribution uses `<cite>` for semantic correctness.

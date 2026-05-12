@@ -1,0 +1,31 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './IconButton.stories';
+
+<Meta of={Stories} />
+
+# IconButton
+
+A square button that contains only an icon, with no visible text label. Always requires an `aria-label` for accessibility.
+
+## Usage
+
+<Canvas of={Stories.Settings} />
+<Controls of={Stories.Settings} />
+
+## Examples
+
+<Canvas of={Stories.Close} />
+<Canvas of={Stories.Menu} />
+<Canvas of={Stories.Search} />
+
+## Toggle (pressed state)
+
+Use `ariaPressed` to mark toggle buttons:
+
+<Canvas of={Stories.Pressed} />
+
+## Accessibility
+
+- `aria-label` is required — the button has no visible text.
+- Use `title` to show a native browser tooltip on hover.
+- For toggle buttons, set `aria-pressed="true"` or `"false"` to communicate state to screen readers.

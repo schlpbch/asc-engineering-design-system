@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Progress.stories';
+
+<Meta of={Stories} />
+
+# Progress
+
+A horizontal bar indicating the completion percentage of a task or process.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Intents
+
+<Canvas of={Stories.Success} />
+<Canvas of={Stories.Warning} />
+<Canvas of={Stories.Error} />
+<Canvas of={Stories.Info} />
+
+## Sizes
+
+<Canvas of={Stories.SizeXs} />
+<Canvas of={Stories.SizeSm} />
+<Canvas of={Stories.SizeMd} />
+<Canvas of={Stories.SizeLg} />
+
+## With label and value
+
+<Canvas of={Stories.WithLabel} />
+
+## Animated
+
+Use `animated` for indeterminate operations where total progress is unknown:
+
+<Canvas of={Stories.Animated} />
+
+## Accessibility
+
+- Rendered as `<progress>` with `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+- Provide a `label` for context — it becomes the element's `aria-label`.

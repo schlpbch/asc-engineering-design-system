@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Tooltip.stories';
+
+<Meta of={Stories} />
+
+# Tooltip
+
+A small popup that reveals additional information about a trigger element on hover or focus. Use for supplementary context — never for critical information.
+
+## Usage
+
+<Canvas of={Stories.Top} />
+<Controls of={Stories.Top} />
+
+## Positions
+
+<Canvas of={Stories.Bottom} />
+<Canvas of={Stories.Left} />
+<Canvas of={Stories.Right} />
+
+## Long text
+
+<Canvas of={Stories.LongText} />
+
+## Accessibility
+
+- The tooltip panel has `role="tooltip"` and is linked to its trigger via `aria-describedby`.
+- Triggered on both hover and focus so keyboard users receive the same information.
+- Do not place interactive elements (links, buttons) inside a tooltip.

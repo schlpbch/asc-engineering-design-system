@@ -7,11 +7,30 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    striped: { control: 'boolean' },
-    hoverable: { control: 'boolean' },
-    bordered: { control: 'boolean' },
-    stickyHeader: { control: 'boolean' },
-    caption: { control: 'text' },
+    striped: {
+      control: 'boolean',
+      description: 'Alternates row background colors for easier scanning.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    hoverable: {
+      control: 'boolean',
+      description: 'Highlights the row under the cursor.',
+      table: { defaultValue: { summary: 'true' } },
+    },
+    bordered: {
+      control: 'boolean',
+      description: 'Adds borders between all cells.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    stickyHeader: {
+      control: 'boolean',
+      description: 'Fixes the header row when the table scrolls vertically.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    caption: {
+      control: 'text',
+      description: 'Accessible caption describing the table, rendered visually below it.',
+    },
   },
 };
 

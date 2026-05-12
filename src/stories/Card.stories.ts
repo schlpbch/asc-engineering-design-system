@@ -10,12 +10,20 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'outlined', 'elevated', 'filled'],
+      description: 'Visual style of the card surface.',
+      table: { defaultValue: { summary: 'default' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Internal padding.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    interactive: { control: 'boolean' },
+    interactive: {
+      control: 'boolean',
+      description: 'Adds hover and focus styles suitable for clickable cards.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

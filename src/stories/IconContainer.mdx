@@ -1,0 +1,25 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './IconContainer.stories';
+
+<Meta of={Stories} />
+
+# IconContainer
+
+A decorative container that applies a colored background and matching tint to an SVG icon. Use in feature lists, empty states, or card headers to give icons visual hierarchy.
+
+## Usage
+
+<Canvas of={Stories.Accent} />
+<Controls of={Stories.Accent} />
+
+## Variants
+
+<Canvas of={Stories.Success} />
+<Canvas of={Stories.Warning} />
+<Canvas of={Stories.Error} />
+<Canvas of={Stories.Info} />
+
+## Accessibility
+
+- The icon inside should be `aria-hidden="true"` if the surrounding context already describes the action or concept.
+- If the container conveys standalone meaning, add a visually-hidden label nearby.

@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Header.stories';
+
+<Meta of={Stories} />
+
+# Header
+
+Top navigation bar with slots for logo, navigation links, actions, and a mobile menu. Supports sticky positioning.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Variants
+
+<Canvas of={Stories.Filled} />
+<Canvas of={Stories.Transparent} />
+
+## Sticky
+
+<Canvas of={Stories.Sticky} />
+
+## Slots
+
+| Slot | Description |
+|------|-------------|
+| `logo` | Brand mark / wordmark on the left |
+| `nav` | Main navigation links (hidden on mobile) |
+| `actions` | Right-side icons, avatar, or CTA buttons |
+| `mobile-menu` | Content shown in the mobile drawer |
+
+## Accessibility
+
+- Wrapped in `<header>` landmark.
+- The mobile menu button has `aria-expanded` and `aria-controls` attributes.
+- Navigation links should use `aria-current="page"` on the active item.

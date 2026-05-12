@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './ModalFooter.stories';
+
+<Meta of={Stories} />
+
+# ModalFooter
+
+The bottom bar of a modal dialog containing a dismiss button, optional help text, and an `actions` slot for additional buttons. Can also be used standalone.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## With help text
+
+<Canvas of={Stories.WithHelpText} />
+
+## With custom actions
+
+<Canvas of={Stories.WithActions} />
+
+## Accessibility
+
+- The close button is associated with the modal via `closeButtonId`/`aria-controls`.
+- Destructive actions in the `actions` slot should have an `intent="error"` visual style and descriptive labels.

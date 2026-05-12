@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './ProjectGrid.stories';
+
+<Meta of={Stories} />
+
+# ProjectGrid
+
+A grid layout for showcasing projects with name, description, tech stack tags, and an external link. Supports a featured 2-column layout and a "View all" link.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Featured layout
+
+<Canvas of={Stories.Featured} />
+
+## Single project
+
+<Canvas of={Stories.Single} />
+
+## Project data shape
+
+```ts
+type Project = {
+  name: string;
+  description: string;
+  tech: string[];
+  href?: string;
+};
+```
+
+## Accessibility
+
+- Project links use descriptive text (the project name) as the anchor label.
+- Tech tags are decorative and `aria-hidden` where not meaningful as standalone labels.

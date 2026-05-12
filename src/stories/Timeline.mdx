@@ -1,0 +1,38 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Timeline.stories';
+
+<Meta of={Stories} />
+
+# Timeline
+
+A vertically stacked list of experience or history entries, each with a title, company, location, period, and bullet points.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Single item
+
+<Canvas of={Stories.SingleItem} />
+
+## With border
+
+<Canvas of={Stories.WithCustomTitle} />
+
+## Timeline item data shape
+
+```ts
+type TimelineItem = {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  bullets: string[];
+};
+```
+
+## Accessibility
+
+- Each entry is a list item (`<li>`) inside an ordered list (`<ol>`).
+- Dates are wrapped in `<time>` where ISO values are available.

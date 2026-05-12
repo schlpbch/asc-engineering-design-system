@@ -1,0 +1,48 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Button.stories';
+
+<Meta of={Stories} />
+
+# Button
+
+The primary interaction element. Renders as a `<button>` by default; automatically becomes an `<a>` when `href` is provided and the button is not disabled or loading.
+
+## Usage
+
+<Canvas of={Stories.Primary} />
+<Controls of={Stories.Primary} />
+
+## Variants
+
+| Variant | When to use |
+|---------|-------------|
+| `solid` | Primary actions with strong visual weight |
+| `outline` | Secondary actions that need clear affordance |
+| `ghost` | Low-priority actions within dense UI |
+| `link` | Inline actions that flow with text |
+
+<Canvas of={Stories.Outline} />
+<Canvas of={Stories.Ghost} />
+
+## Intents
+
+Use `intent` to communicate the nature of the action:
+
+<Canvas of={Stories.Destructive} />
+
+## States
+
+<Canvas of={Stories.Loading} />
+<Canvas of={Stories.Disabled} />
+
+## Sizes
+
+<Canvas of={Stories.Small} />
+<Canvas of={Stories.Large} />
+
+## Accessibility
+
+- Uses native `<button>` semantics; no additional ARIA needed.
+- `disabled` buttons are excluded from focus order and have `pointer-events: none`.
+- Loading state hides the label with `sr-only` and exposes `loadingText` to screen readers.
+- Focus ring is always visible via `focus-visible:ring`.

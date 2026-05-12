@@ -1,0 +1,35 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Toast.stories';
+
+<Meta of={Stories} />
+
+# Toast
+
+A transient notification that appears at a corner of the screen. Auto-dismisses after a configurable duration, or can be persistent.
+
+## Usage
+
+<Canvas of={Stories.Info} />
+<Controls of={Stories.Info} />
+
+## Intents
+
+<Canvas of={Stories.Success} />
+<Canvas of={Stories.Warning} />
+<Canvas of={Stories.Error} />
+
+## With title
+
+<Canvas of={Stories.WithTitle} />
+
+## Persistent (no auto-dismiss)
+
+Set `duration={0}` to keep the toast visible until dismissed:
+
+<Canvas of={Stories.NoDismiss} />
+
+## Accessibility
+
+- Rendered as `role="status"` (non-interrupting) by default; use `role="alert"` for critical errors.
+- The dismiss button has `aria-label="Dismiss notification"`.
+- Prefer short messages that are meaningful without additional context.

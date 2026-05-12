@@ -1,0 +1,38 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Alert.stories';
+
+<Meta of={Stories} />
+
+# Alert
+
+Displays a contextual message with a semantic intent (info, success, warning, or error). Use it to communicate status, feedback, or important notices to the user.
+
+## Usage
+
+<Canvas of={Stories.Info} />
+<Controls of={Stories.Info} />
+
+## Variants
+
+| Variant | When to use |
+|---------|-------------|
+| `default` | Standard inline alert with a tinted background |
+| `filled` | High-emphasis alert with a solid background |
+| `outlined` | Subtle alert using a border instead of background fill |
+
+## Intents
+
+<Canvas of={Stories.Success} />
+<Canvas of={Stories.Warning} />
+<Canvas of={Stories.Error} />
+
+## Features
+
+<Canvas of={Stories.Dismissible} />
+<Canvas of={Stories.NoIcon} />
+
+## Accessibility
+
+- The alert element uses `role="alert"` so screen readers announce it immediately.
+- The dismiss button includes an `aria-label="Dismiss"` for screen reader users.
+- Icons are `aria-hidden` to avoid redundant announcements.

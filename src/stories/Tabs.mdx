@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Tabs.stories';
+
+<Meta of={Stories} />
+
+# Tabs
+
+A tabbed interface for switching between related content panels. Pass the `panels` prop as a record of `tabId → HTML string` to render content for each tab.
+
+## Usage
+
+<Canvas of={Stories.Underline} />
+<Controls of={Stories.Underline} />
+
+## Variants
+
+<Canvas of={Stories.Pills} />
+<Canvas of={Stories.Bordered} />
+
+## With badges
+
+<Canvas of={Stories.WithBadge} />
+
+## Disabled tabs
+
+<Canvas of={Stories.WithDisabled} />
+
+## Sizes
+
+<Canvas of={Stories.SizeSm} />
+<Canvas of={Stories.SizeLg} />
+
+## Accessibility
+
+- Tab list uses `role="tablist"`, each tab uses `role="tab"`, and each panel uses `role="tabpanel"`.
+- Active tab has `aria-selected="true"`; panels are shown/hidden with `aria-hidden`.
+- Keyboard: `ArrowLeft`/`ArrowRight` navigate between tabs; `Enter`/`Space` activates.

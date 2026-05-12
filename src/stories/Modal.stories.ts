@@ -10,11 +10,27 @@ const meta = {
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      description: 'Maximum width of the modal panel.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    title: { control: 'text' },
-    description: { control: 'text' },
-    open: { control: 'boolean' },
-    showCloseButton: { control: 'boolean' },
+    title: {
+      control: 'text',
+      description: 'Heading rendered in the modal header.',
+    },
+    description: {
+      control: 'text',
+      description: 'Subtitle rendered below the title.',
+    },
+    open: {
+      control: 'boolean',
+      description: 'Controls modal visibility. Pass `true` to show the modal in Storybook.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    showCloseButton: {
+      control: 'boolean',
+      description: 'Renders an × button in the top-right corner of the header.',
+      table: { defaultValue: { summary: 'true' } },
+    },
   },
 };
 

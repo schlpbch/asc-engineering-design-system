@@ -10,8 +10,14 @@ const meta = {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
+      description: 'Diameter of the spinner ring.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    message: { control: 'text' },
+    message: {
+      control: 'text',
+      description: 'Visible loading message shown below the spinner. Pass an empty string to hide it.',
+      table: { defaultValue: { summary: 'Loading...' } },
+    },
   },
 };
 

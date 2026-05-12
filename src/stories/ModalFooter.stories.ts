@@ -7,9 +7,19 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    closeText: { control: 'text' },
-    helpText: { control: 'text' },
-    closeButtonId: { control: 'text' },
+    closeText: {
+      control: 'text',
+      description: 'Label for the dismiss button.',
+      table: { defaultValue: { summary: 'Close' } },
+    },
+    helpText: {
+      control: 'text',
+      description: 'Optional secondary text shown to the left of the action buttons.',
+    },
+    closeButtonId: {
+      control: 'text',
+      description: 'DOM id placed on the close button, used by the parent Modal to wire up dismissal.',
+    },
   },
 };
 

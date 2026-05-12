@@ -40,8 +40,15 @@ const meta = {
     layout: 'fullscreen',
   },
   argTypes: {
-    title: { control: 'text' },
-    border: { control: 'boolean' },
+    title: {
+      control: 'text',
+      description: 'Section heading above the timeline.',
+    },
+    border: {
+      control: 'boolean',
+      description: 'Adds a top border to the section.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

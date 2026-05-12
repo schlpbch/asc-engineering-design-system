@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Table.stories';
+
+<Meta of={Stories} />
+
+# Table
+
+A data table component for displaying structured information. Supports striped rows, hover highlighting, column borders, sticky headers, and an accessible caption.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Striped rows
+
+<Canvas of={Stories.Striped} />
+
+## Bordered
+
+<Canvas of={Stories.Bordered} />
+
+## With badges in cells
+
+<Canvas of={Stories.WithBadges} />
+
+## Sticky header
+
+<Canvas of={Stories.StickyHeader} />
+
+## With caption
+
+<Canvas of={Stories.WithCaption} />
+
+## Accessibility
+
+- Wrapped in `<table>` with proper `<thead>`, `<tbody>`, `<th>`, and `<td>` elements.
+- Use `caption` to provide a visible and accessible description of the table's content.
+- Column headers have `scope="col"` for screen reader association.

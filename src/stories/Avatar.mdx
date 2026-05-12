@@ -1,0 +1,43 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Avatar.stories';
+
+<Meta of={Stories} />
+
+# Avatar
+
+Represents a user or entity with an image or initials fallback. Supports an optional presence status indicator.
+
+## Usage
+
+<Canvas of={Stories.WithImage} />
+<Controls of={Stories.WithImage} />
+
+## Image vs. initials
+
+Provide `src` + `alt` for an image avatar. If `src` is absent or fails to load, `initials` is shown as a colored placeholder.
+
+<Canvas of={Stories.Initials} />
+
+## Sizes
+
+<Canvas of={Stories.SizeXs} />
+<Canvas of={Stories.SizeSm} />
+<Canvas of={Stories.SizeMd} />
+<Canvas of={Stories.SizeLg} />
+<Canvas of={Stories.SizeXl} />
+
+## Status indicators
+
+<Canvas of={Stories.StatusOnline} />
+<Canvas of={Stories.StatusBusy} />
+<Canvas of={Stories.StatusAway} />
+<Canvas of={Stories.StatusOffline} />
+
+## Shape
+
+<Canvas of={Stories.RoundedShape} />
+
+## Accessibility
+
+- Always provide `alt` text describing the person or entity.
+- Status indicators are decorative by default; include the status in accessible text if it conveys critical meaning.

@@ -1,0 +1,34 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Breadcrumb.stories';
+
+<Meta of={Stories} />
+
+# Breadcrumb
+
+A navigational aid showing the current page's position within a site hierarchy. The last item is the current page and is rendered without a link.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Separators
+
+<Canvas of={Stories.WithSlash} />
+<Canvas of={Stories.WithDot} />
+
+## Lengths
+
+<Canvas of={Stories.TwoLevels} />
+<Canvas of={Stories.Long} />
+
+## Sizes
+
+<Canvas of={Stories.SizeSm} />
+<Canvas of={Stories.SizeLg} />
+
+## Accessibility
+
+- Wrapped in `<nav aria-label="Breadcrumb">` for landmark navigation.
+- The current page item has `aria-current="page"`.
+- Separator characters are `aria-hidden` to prevent repetitive announcements.

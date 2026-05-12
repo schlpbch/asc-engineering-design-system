@@ -7,12 +7,20 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    text: { control: 'text' },
+    text: {
+      control: 'text',
+      description: 'Content of the tooltip popup.',
+    },
     position: {
       control: 'select',
       options: ['top', 'bottom', 'left', 'right'],
+      description: 'Preferred placement of the tooltip relative to its trigger.',
+      table: { defaultValue: { summary: 'top' } },
     },
-    maxWidth: { control: 'text' },
+    maxWidth: {
+      control: 'text',
+      description: 'CSS max-width of the tooltip panel (e.g. `200px`). Defaults to `auto`.',
+    },
   },
 };
 

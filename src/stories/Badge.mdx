@@ -1,0 +1,42 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Badge.stories';
+
+<Meta of={Stories} />
+
+# Badge
+
+A compact label used to display status, category, or count information. Common uses include status chips, filter tags, and notification counts.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Intents
+
+<Canvas of={Stories.Success} />
+<Canvas of={Stories.Error} />
+<Canvas of={Stories.Warning} />
+
+## Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Tinted background with matching text |
+| `outline` | Border only, no background fill |
+| `filled` | Solid background for high-emphasis labels |
+| `dot` | Prefixes a colored dot indicator |
+
+<Canvas of={Stories.Outline} />
+<Canvas of={Stories.Dot} />
+
+## Removable
+
+Use `removable` for filter tags the user can clear:
+
+<Canvas of={Stories.Removable} />
+
+## Accessibility
+
+- The remove button includes `aria-label="Remove"` for screen reader users.
+- Status badges should supplement — not replace — meaningful page context.

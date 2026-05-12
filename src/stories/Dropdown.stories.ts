@@ -10,16 +10,25 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'ghost', 'outline'],
+      description: 'Visual style of the trigger button.',
+      table: { defaultValue: { summary: 'default' } },
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
+      description: 'Size of the trigger button.',
+      table: { defaultValue: { summary: 'md' } },
     },
     align: {
       control: 'select',
       options: ['left', 'right'],
+      description: 'Alignment of the dropdown panel relative to the trigger.',
+      table: { defaultValue: { summary: 'left' } },
     },
-    label: { control: 'text' },
+    label: {
+      control: 'text',
+      description: 'Text label for the default trigger button. Ignored when a custom trigger slot is provided.',
+    },
   },
 };
 

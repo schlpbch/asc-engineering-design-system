@@ -7,9 +7,18 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    title: { control: 'text' },
-    subtitle: { control: 'text' },
-    closeButtonId: { control: 'text' },
+    title: {
+      control: 'text',
+      description: 'Primary heading of the modal.',
+    },
+    subtitle: {
+      control: 'text',
+      description: 'Optional description rendered below the title.',
+    },
+    closeButtonId: {
+      control: 'text',
+      description: 'DOM id placed on the × button, used by the parent Modal to wire up dismissal.',
+    },
   },
 };
 

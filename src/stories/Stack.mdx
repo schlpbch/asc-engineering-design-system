@@ -1,0 +1,34 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Stack.stories';
+
+<Meta of={Stories} />
+
+# Stack
+
+A flexbox layout utility for arranging children with consistent spacing. Use it to replace ad-hoc `flex` + `gap` patterns with a declarative API.
+
+## Usage
+
+<Canvas of={Stories.Vertical} />
+<Controls of={Stories.Vertical} />
+
+## Directions
+
+<Canvas of={Stories.Horizontal} />
+
+## Justify
+
+<Canvas of={Stories.SpaceBetween} />
+
+## Combined align and justify
+
+<Canvas of={Stories.Centered} />
+
+## Gap sizes
+
+<Canvas of={Stories.SmallGap} />
+<Canvas of={Stories.LargeGap} />
+
+## Accessibility
+
+No accessibility considerations specific to this component — it is a pure layout primitive.

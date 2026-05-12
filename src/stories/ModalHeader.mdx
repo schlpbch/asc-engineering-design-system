@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './ModalHeader.stories';
+
+<Meta of={Stories} />
+
+# ModalHeader
+
+The top section of a modal dialog containing a title, optional subtitle, and an × close button. Can also be used standalone.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## With subtitle
+
+<Canvas of={Stories.WithSubtitle} />
+
+## Long titles
+
+<Canvas of={Stories.LongTitle} />
+
+## Accessibility
+
+- The title is exposed as the accessible name of the dialog via `aria-labelledby`.
+- The × button uses `aria-label="Close"`.

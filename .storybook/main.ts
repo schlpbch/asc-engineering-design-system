@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const config = {
-  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
 
   addons: ['@storybook/addon-docs'],
 

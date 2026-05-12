@@ -1,0 +1,38 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './FilterButtons.stories';
+
+<Meta of={Stories} />
+
+# FilterButtons
+
+A group of toggle buttons for filtering a list or grid. Supports both single-select (radio-like) and multi-select (checkbox-like) modes.
+
+## Usage
+
+<Canvas of={Stories.SingleSelect} />
+<Controls of={Stories.SingleSelect} />
+
+## Multi-select
+
+<Canvas of={Stories.MultiSelect} />
+
+## No active filter
+
+<Canvas of={Stories.NoActiveFilter} />
+
+## Filter data shape
+
+Each filter in the `filters` array takes:
+
+```ts
+{
+  id: string;       // unique DOM id
+  label: string;    // button text
+  active: boolean;  // initial active state
+}
+```
+
+## Accessibility
+
+- Buttons use `aria-pressed` to communicate toggled state to screen readers.
+- The group label is exposed via `aria-label` on the containing element.

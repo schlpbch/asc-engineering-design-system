@@ -12,14 +12,25 @@ const meta = {
     maxWidth: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', '2xl', '4xl', '6xl', 'full'],
+      description: 'Maximum width constraint applied to the container.',
+      table: { defaultValue: { summary: 'xl' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Horizontal padding',
+      description: 'Horizontal padding applied inside the container.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    centered: { control: 'boolean' },
-    padding: { control: 'boolean' },
+    centered: {
+      control: 'boolean',
+      description: 'Centers the container horizontally with auto margins.',
+      table: { defaultValue: { summary: 'true' } },
+    },
+    padding: {
+      control: 'boolean',
+      description: 'Whether to apply horizontal padding.',
+      table: { defaultValue: { summary: 'true' } },
+    },
   },
 };
 

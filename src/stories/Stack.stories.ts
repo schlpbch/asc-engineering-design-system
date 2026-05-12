@@ -12,21 +12,32 @@ const meta = {
     direction: {
       control: 'select',
       options: ['vertical', 'horizontal'],
+      description: 'Flex direction: `vertical` stacks children top-to-bottom, `horizontal` left-to-right.',
+      table: { defaultValue: { summary: 'vertical' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      description: 'Gap between items',
+      description: 'Gap between child elements.',
+      table: { defaultValue: { summary: 'md' } },
     },
     align: {
       control: 'select',
       options: ['start', 'center', 'end', 'stretch'],
+      description: 'Cross-axis alignment (`align-items`).',
+      table: { defaultValue: { summary: 'start' } },
     },
     justify: {
       control: 'select',
       options: ['start', 'center', 'end', 'between', 'around', 'evenly'],
+      description: 'Main-axis distribution (`justify-content`).',
+      table: { defaultValue: { summary: 'start' } },
     },
-    wrap: { control: 'boolean' },
+    wrap: {
+      control: 'boolean',
+      description: 'Allows children to wrap onto multiple lines.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

@@ -10,10 +10,14 @@ const meta = {
     separator: {
       control: 'select',
       options: ['slash', 'chevron', 'dot'],
+      description: 'Character or icon used between breadcrumb segments.',
+      table: { defaultValue: { summary: 'chevron' } },
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
+      description: 'Font size of the breadcrumb trail.',
+      table: { defaultValue: { summary: 'md' } },
     },
   },
 };

@@ -1,0 +1,39 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './FormField.stories';
+
+<Meta of={Stories} />
+
+# FormField
+
+A wrapper pattern that pairs a label with any form control (input, textarea, select, etc.) and provides consistent validation message and hint text rendering.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Required fields
+
+<Canvas of={Stories.Required} />
+
+## Validation
+
+<Canvas of={Stories.WithError} />
+
+## With description
+
+<Canvas of={Stories.WithDescription} />
+
+## Horizontal layout
+
+<Canvas of={Stories.Horizontal} />
+
+## With select
+
+<Canvas of={Stories.WithSelect} />
+
+## Accessibility
+
+- The `<label>` is associated with the field via `for`/`id`.
+- Validation messages are linked via `aria-describedby` so screen readers announce them.
+- Required indicator (*) is supplemented by `aria-required="true"` on the field.

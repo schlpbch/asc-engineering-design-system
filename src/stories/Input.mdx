@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Input.stories';
+
+<Meta of={Stories} />
+
+# Input
+
+A single-line text field with validation states, optional hint text, and support for prefix/suffix slots.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Validation states
+
+<Canvas of={Stories.WithError} />
+<Canvas of={Stories.WithWarning} />
+<Canvas of={Stories.WithSuccess} />
+
+## Helper text
+
+<Canvas of={Stories.WithHint} />
+
+## Disabled
+
+<Canvas of={Stories.Disabled} />
+
+## Input types
+
+<Canvas of={Stories.Search} />
+
+## Accessibility
+
+- Always associate a `<label>` with the input using `for`/`id`. Use `FormField` to do this consistently.
+- Validation messages use `role="alert"` or are linked via `aria-describedby`.
+- `disabled` inputs are excluded from the tab order.

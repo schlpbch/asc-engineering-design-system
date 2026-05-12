@@ -10,15 +10,33 @@ const meta = {
     intent: {
       control: 'select',
       options: ['primary', 'success', 'warning', 'error', 'info'],
+      description: 'Semantic color intent of the notification.',
+      table: { defaultValue: { summary: 'info' } },
     },
     position: {
       control: 'select',
       options: ['top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center'],
+      description: 'Corner/edge of the viewport where the toast appears.',
+      table: { defaultValue: { summary: 'bottom-right' } },
     },
-    dismissible: { control: 'boolean' },
-    duration: { control: 'number' },
-    title: { control: 'text' },
-    message: { control: 'text' },
+    dismissible: {
+      control: 'boolean',
+      description: 'Shows an × button the user can click to close the toast early.',
+      table: { defaultValue: { summary: 'true' } },
+    },
+    duration: {
+      control: 'number',
+      description: 'Auto-dismiss delay in milliseconds. `0` disables auto-dismiss.',
+      table: { defaultValue: { summary: '5000' } },
+    },
+    title: {
+      control: 'text',
+      description: 'Optional bold heading line.',
+    },
+    message: {
+      control: 'text',
+      description: 'Main notification text.',
+    },
   },
 };
 

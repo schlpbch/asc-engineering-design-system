@@ -70,12 +70,19 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'minimal', 'dark'],
+      description: 'Visual theme of the footer. `minimal` hides the column slot.',
+      table: { defaultValue: { summary: 'default' } },
     },
     maxWidth: {
       control: 'select',
       options: ['lg', 'xl', '4xl', '6xl', 'full'],
+      description: 'Maximum width of the footer content area.',
+      table: { defaultValue: { summary: '6xl' } },
     },
-    copyright: { control: 'text' },
+    copyright: {
+      control: 'text',
+      description: 'Copyright line rendered at the bottom of the footer.',
+    },
   },
 };
 

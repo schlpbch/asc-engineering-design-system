@@ -10,10 +10,23 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    title: { control: 'text' },
-    subtitle: { control: 'text' },
-    border: { control: 'boolean' },
-    padding: { control: 'text' },
+    title: {
+      control: 'text',
+      description: 'Section heading.',
+    },
+    subtitle: {
+      control: 'text',
+      description: 'Optional subtitle shown below the heading.',
+    },
+    border: {
+      control: 'boolean',
+      description: 'Adds a top border to visually separate sections.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    padding: {
+      control: 'text',
+      description: 'Tailwind padding class overriding the default (e.g. `py-8`).',
+    },
   },
 };
 

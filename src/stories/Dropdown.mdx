@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Dropdown.stories';
+
+<Meta of={Stories} />
+
+# Dropdown
+
+A disclosure menu that reveals a list of actions or links when the trigger is activated. Supports a custom `trigger` slot to replace the default button.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## With icons
+
+<Canvas of={Stories.WithIcons} />
+
+## Variants
+
+<Canvas of={Stories.GhostTrigger} />
+
+## Alignment
+
+<Canvas of={Stories.RightAligned} />
+
+## Custom trigger
+
+Pass any content to the `trigger` slot to replace the default button:
+
+<Canvas of={Stories.AsUserMenu} />
+
+## Accessibility
+
+- The trigger button has `aria-haspopup="true"` and `aria-expanded` reflecting open state.
+- The menu panel has `role="menu"` and items have `role="menuitem"`.
+- Keyboard: `Enter`/`Space` opens; `Escape` closes; `ArrowUp`/`ArrowDown` navigate items.

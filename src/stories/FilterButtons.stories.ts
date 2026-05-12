@@ -7,8 +7,15 @@ const meta = {
     layout: 'padded',
   },
   argTypes: {
-    label: { control: 'text' },
-    multiSelect: { control: 'boolean' },
+    label: {
+      control: 'text',
+      description: 'Accessible prefix label rendered before the filter buttons.',
+    },
+    multiSelect: {
+      control: 'boolean',
+      description: 'When true, multiple filters can be active simultaneously.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

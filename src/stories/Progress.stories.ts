@@ -10,15 +10,33 @@ const meta = {
     intent: {
       control: 'select',
       options: ['primary', 'success', 'warning', 'error', 'info'],
+      description: 'Color of the progress bar fill.',
+      table: { defaultValue: { summary: 'primary' } },
     },
     size: {
       control: 'select',
       options: ['xs', 'sm', 'md', 'lg'],
+      description: 'Height of the progress track.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    value: { control: { type: 'range', min: 0, max: 100, step: 1 } },
-    showValue: { control: 'boolean' },
-    animated: { control: 'boolean' },
-    label: { control: 'text' },
+    value: {
+      control: { type: 'range', min: 0, max: 100, step: 1 },
+      description: 'Current progress value (0–100).',
+    },
+    showValue: {
+      control: 'boolean',
+      description: 'Displays the percentage value as text beside the bar.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    animated: {
+      control: 'boolean',
+      description: 'Adds a pulsing animation to signal an in-progress operation.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    label: {
+      control: 'text',
+      description: 'Accessible label and visible caption above the progress bar.',
+    },
   },
 };
 

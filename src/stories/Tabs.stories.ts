@@ -10,12 +10,19 @@ const meta = {
     variant: {
       control: 'select',
       options: ['underline', 'pills', 'bordered'],
+      description: 'Visual style of the tab list.',
+      table: { defaultValue: { summary: 'underline' } },
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
+      description: 'Font size and padding of the tab items.',
+      table: { defaultValue: { summary: 'md' } },
     },
-    activeTab: { control: 'text' },
+    activeTab: {
+      control: 'text',
+      description: 'The `id` of the initially active tab.',
+    },
   },
 };
 

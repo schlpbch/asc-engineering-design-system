@@ -1,0 +1,37 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Modal.stories';
+
+<Meta of={Stories} />
+
+# Modal
+
+A dialog overlay for focused tasks, confirmations, or detail views. Renders as a native `<dialog>` element.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Sizes
+
+<Canvas of={Stories.Small} />
+<Canvas of={Stories.Large} />
+
+## Without close button
+
+<Canvas of={Stories.NoCloseButton} />
+
+## Without header
+
+<Canvas of={Stories.NoHeader} />
+
+## Composition
+
+`Modal` composes `ModalHeader` and `ModalFooter` sub-components. Use them independently when building custom layouts.
+
+## Accessibility
+
+- Built on the native `<dialog>` element — focus is trapped inside when open.
+- `Escape` key closes the modal by default.
+- The dialog has `aria-labelledby` pointing to the title and `aria-describedby` pointing to the description.
+- Backdrop click closes the modal when `closeOnBackdropClick` is true.

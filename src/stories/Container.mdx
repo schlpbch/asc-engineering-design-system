@@ -1,0 +1,27 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Container.stories';
+
+<Meta of={Stories} />
+
+# Container
+
+A layout wrapper that constrains content width and optionally centers it. Use it as the outermost wrapper for page sections to maintain consistent margins across viewport sizes.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Max widths
+
+<Canvas of={Stories.Narrow} />
+<Canvas of={Stories.Wide} />
+<Canvas of={Stories.FullWidth} />
+
+## Without padding
+
+<Canvas of={Stories.NoPadding} />
+
+## Accessibility
+
+No accessibility considerations specific to this component — it is a pure layout primitive.

@@ -10,9 +10,13 @@ const meta = {
     type: {
       control: 'select',
       options: ['card', 'list', 'service'],
+      description: 'Shape of the skeleton placeholder matching the target content layout.',
+      table: { defaultValue: { summary: 'list' } },
     },
     count: {
       control: { type: 'number', min: 1, max: 10 },
+      description: 'Number of skeleton items to render.',
+      table: { defaultValue: { summary: '3' } },
     },
   },
 };

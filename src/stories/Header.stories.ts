@@ -47,12 +47,20 @@ const meta = {
     variant: {
       control: 'select',
       options: ['default', 'transparent', 'filled'],
+      description: 'Visual theme of the header bar.',
+      table: { defaultValue: { summary: 'default' } },
     },
     maxWidth: {
       control: 'select',
       options: ['lg', 'xl', '4xl', '6xl', 'full'],
+      description: 'Maximum width of the header content area.',
+      table: { defaultValue: { summary: '6xl' } },
     },
-    sticky: { control: 'boolean' },
+    sticky: {
+      control: 'boolean',
+      description: 'Fixes the header to the top of the viewport on scroll.',
+      table: { defaultValue: { summary: 'false' } },
+    },
   },
 };
 

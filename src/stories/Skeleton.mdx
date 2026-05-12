@@ -1,0 +1,29 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Skeleton.stories';
+
+<Meta of={Stories} />
+
+# Skeleton
+
+Placeholder loading animation that mimics the shape of the content it will replace. Reduces perceived load time and prevents layout shift.
+
+## Usage
+
+<Canvas of={Stories.List} />
+<Controls of={Stories.List} />
+
+## Types
+
+| Type | Mimics |
+|------|--------|
+| `list` | A row-based list with text lines |
+| `card` | A card grid with image and text placeholders |
+| `service` | A service/status entry with icon and lines |
+
+<Canvas of={Stories.Card} />
+<Canvas of={Stories.Service} />
+
+## Accessibility
+
+- The skeleton container has `aria-busy="true"` and `aria-label="Loading…"`.
+- Swap the skeleton for real content once loading completes to update the live region.

@@ -1,0 +1,31 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Footer.stories';
+
+<Meta of={Stories} />
+
+# Footer
+
+Page-level footer with slots for a brand block, navigation columns, bottom links, and optional copyright text.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Variants
+
+<Canvas of={Stories.Dark} />
+<Canvas of={Stories.Minimal} />
+
+## Slots
+
+| Slot | Description |
+|------|-------------|
+| `brand` | Logo + tagline block on the left |
+| `columns` | Navigation link columns |
+| `bottom` | Secondary links in the bottom bar |
+
+## Accessibility
+
+- Use `<nav>` elements inside the `columns` slot with distinct `aria-label` values.
+- The footer element itself is a `<footer>` landmark.

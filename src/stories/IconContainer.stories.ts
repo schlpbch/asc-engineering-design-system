@@ -16,6 +16,8 @@ const meta = {
     variant: {
       control: 'select',
       options: ['accent', 'success', 'warning', 'error', 'info'],
+      description: 'Color scheme of the icon background and icon tint.',
+      table: { defaultValue: { summary: 'accent' } },
     },
   },
 };

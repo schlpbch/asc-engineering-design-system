@@ -1,0 +1,89 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Introduction" />
+
+# ASC Engineering Design System
+
+A component library built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com), providing 26 primitive components and 8 higher-level patterns.
+
+**Package:** `@asc-engineering/design-system` · **Version:** 0.3.1
+
+---
+
+## Getting started
+
+```bash
+pnpm add @asc-engineering/design-system
+```
+
+Import components directly:
+
+```astro
+---
+import Button from '@asc-engineering/design-system/components/Button.astro';
+import Alert from '@asc-engineering/design-system/components/Alert.astro';
+---
+
+<Button variant="solid" intent="primary">Click me</Button>
+```
+
+---
+
+## Design tokens
+
+| Token | Values |
+|-------|--------|
+| **Intent** | `primary` · `secondary` · `success` · `warning` · `error` · `info` |
+| **Size** | `xs` · `sm` · `md` · `lg` · `xl` |
+| **Variant** | per-component — see individual docs |
+
+The design token palette is rooted in `accent-*` (teal) and `slate-*` (neutral) Tailwind scales, with semantic intent colors mapped to standard hues (green, amber, red, blue).
+
+---
+
+## Component status
+
+| Component | Category | Status |
+|-----------|----------|--------|
+| Alert | Components | Stable |
+| Avatar | Components | Stable |
+| Badge | Components | Stable |
+| Breadcrumb | Components | Stable |
+| Button | Components | Stable |
+| Card | Components | Stable |
+| Container | Layout | Stable |
+| Dropdown | Components | Stable |
+| Footer | Navigation | Stable |
+| Header | Navigation | Stable |
+| IconButton | Components | Stable |
+| IconContainer | Components | Stable |
+| Input | Components | Stable |
+| LoadingSpinner | Components | Stable |
+| Modal | Components | Stable |
+| ModalFooter | Components | Stable |
+| ModalHeader | Components | Stable |
+| Progress | Components | Stable |
+| SectionHeader | Components | Stable |
+| Skeleton | Components | Stable |
+| Stack | Layout | Stable |
+| Table | Components | Stable |
+| Tabs | Components | Stable |
+| Textarea | Components | Stable |
+| Toast | Components | Stable |
+| Tooltip | Components | Stable |
+| ConfirmDialog | Patterns | Stable |
+| FilterButtons | Patterns | Stable |
+| FormField | Patterns | Stable |
+| PageSection | Patterns | Stable |
+| ProjectGrid | Patterns | Stable |
+| SkillsGrid | Patterns | Stable |
+| TestimonialsGrid | Patterns | Stable |
+| Timeline | Patterns | Stable |
+
+---
+
+## Peer requirements
+
+- Astro ≥ 6.0
+- Tailwind CSS ≥ 4.0
+- Node ≥ 22

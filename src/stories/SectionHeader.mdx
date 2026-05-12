@@ -1,0 +1,26 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './SectionHeader.stories';
+
+<Meta of={Stories} />
+
+# SectionHeader
+
+A simple heading component for labeling content sections within a page. Accepts an optional icon slot to the left of the title.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## With icon
+
+<Canvas of={Stories.WithIcon} />
+
+## Long titles
+
+<Canvas of={Stories.LongTitle} />
+
+## Accessibility
+
+- Renders as `<h2>` by default — adjust heading level in context to maintain document outline.
+- Icons should be `aria-hidden="true"`.

@@ -1,0 +1,36 @@
+import { Meta, Canvas, Controls } from '@storybook/blocks';
+import * as Stories from './Card.stories';
+
+<Meta of={Stories} />
+
+# Card
+
+A surface container for grouping related content. Can be made interactive for clickable card patterns.
+
+## Usage
+
+<Canvas of={Stories.Default} />
+<Controls of={Stories.Default} />
+
+## Variants
+
+| Variant | Description |
+|---------|-------------|
+| `default` | Subtle background with no border |
+| `outlined` | Bordered card with no elevation |
+| `elevated` | Drop shadow for depth |
+| `filled` | Solid tinted background |
+
+<Canvas of={Stories.Outlined} />
+<Canvas of={Stories.Elevated} />
+
+## Interactive
+
+Add `interactive` when the entire card is a clickable target:
+
+<Canvas of={Stories.Interactive} />
+
+## Accessibility
+
+- When using `interactive`, ensure the card or its child wraps the content in an `<a>` or `<button>` with a meaningful label.
+- Avoid nesting interactive elements inside an interactive card.
