@@ -4,9 +4,32 @@ import { Meta } from '@storybook/addon-docs/blocks';
 
 # ASC Engineering Design System
 
-A component library built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com), providing 26 primitive components and 8 higher-level patterns. Built for [asc.engineering](https://asc.engineering).
+A component library built with [Astro](https://astro.build) and
+[Tailwind CSS v4](https://tailwindcss.com), providing 26 primitive components
+and 8 higher-level patterns. Built for
+[asc.engineering](https://asc.engineering), it exists to keep that site's UI
+consistent and to make new pages and sections quick to assemble from a shared
+set of building blocks.
 
 **Package:** `@asc-engineering/design-system` · **Version:** 0.3.1
+
+---
+
+## About this project
+
+[asc.engineering](https://asc.engineering) is built as a collection of Astro
+pages composed almost entirely from this library — primitives like `Button`,
+`Card`, and `Badge` for everyday UI, and higher-level patterns like
+`ProjectGrid`, `SkillsGrid`, `TestimonialsGrid`, and `Timeline` for the site's
+portfolio-style sections.
+
+Keeping the design system as its own package — rather than living inside the
+site's codebase — also means it can be developed and previewed in isolation here
+in Storybook, with every component's states, props, and controls documented
+independently of any one page that happens to use it.
+
+Feel free to use this library in your own projects, and contribute back any
+improvements or new components that could benefit the broader community.
 
 ---
 
@@ -31,54 +54,56 @@ import Alert from '@asc-engineering/design-system/components/Alert.astro';
 
 ## Design tokens
 
-| Token | Values |
-|-------|--------|
-| **Intent** | `primary` · `secondary` · `success` · `warning` · `error` · `info` |
-| **Size** | `xs` · `sm` · `md` · `lg` · `xl` |
-| **Variant** | per-component — see individual docs |
+| Token       | Values                                                             |
+| ----------- | ------------------------------------------------------------------ |
+| **Intent**  | `primary` · `secondary` · `success` · `warning` · `error` · `info` |
+| **Size**    | `xs` · `sm` · `md` · `lg` · `xl`                                   |
+| **Variant** | per-component — see individual docs                                |
 
-The design token palette is rooted in `accent-*` (teal) and `slate-*` (neutral) Tailwind scales, with semantic intent colors mapped to standard hues (green, amber, red, blue).
+The design token palette is rooted in `accent-*` (teal) and `slate-*` (neutral)
+Tailwind scales, with semantic intent colors mapped to standard hues (green,
+amber, red, blue).
 
 ---
 
 ## Component status
 
-| Component | Category | Status |
-|-----------|----------|--------|
-| Alert | Components | Stable |
-| Avatar | Components | Stable |
-| Badge | Components | Stable |
-| Breadcrumb | Components | Stable |
-| Button | Components | Stable |
-| Card | Components | Stable |
-| Container | Layout | Stable |
-| Dropdown | Components | Stable |
-| Footer | Navigation | Stable |
-| Header | Navigation | Stable |
-| IconButton | Components | Stable |
-| IconContainer | Components | Stable |
-| Input | Components | Stable |
-| LoadingSpinner | Components | Stable |
-| Modal | Components | Stable |
-| ModalFooter | Components | Stable |
-| ModalHeader | Components | Stable |
-| Progress | Components | Stable |
-| SectionHeader | Components | Stable |
-| Skeleton | Components | Stable |
-| Stack | Layout | Stable |
-| Table | Components | Stable |
-| Tabs | Components | Stable |
-| Textarea | Components | Stable |
-| Toast | Components | Stable |
-| Tooltip | Components | Stable |
-| ConfirmDialog | Patterns | Stable |
-| FilterButtons | Patterns | Stable |
-| FormField | Patterns | Stable |
-| PageSection | Patterns | Stable |
-| ProjectGrid | Patterns | Stable |
-| SkillsGrid | Patterns | Stable |
-| TestimonialsGrid | Patterns | Stable |
-| Timeline | Patterns | Stable |
+| Component        | Category   | Status |
+| ---------------- | ---------- | ------ |
+| Alert            | Components | Stable |
+| Avatar           | Components | Stable |
+| Badge            | Components | Stable |
+| Breadcrumb       | Components | Stable |
+| Button           | Components | Stable |
+| Card             | Components | Stable |
+| Container        | Layout     | Stable |
+| Dropdown         | Components | Stable |
+| Footer           | Navigation | Stable |
+| Header           | Navigation | Stable |
+| IconButton       | Components | Stable |
+| IconContainer    | Components | Stable |
+| Input            | Components | Stable |
+| LoadingSpinner   | Components | Stable |
+| Modal            | Components | Stable |
+| ModalFooter      | Components | Stable |
+| ModalHeader      | Components | Stable |
+| Progress         | Components | Stable |
+| SectionHeader    | Components | Stable |
+| Skeleton         | Components | Stable |
+| Stack            | Layout     | Stable |
+| Table            | Components | Stable |
+| Tabs             | Components | Stable |
+| Textarea         | Components | Stable |
+| Toast            | Components | Stable |
+| Tooltip          | Components | Stable |
+| ConfirmDialog    | Patterns   | Stable |
+| FilterButtons    | Patterns   | Stable |
+| FormField        | Patterns   | Stable |
+| PageSection      | Patterns   | Stable |
+| ProjectGrid      | Patterns   | Stable |
+| SkillsGrid       | Patterns   | Stable |
+| TestimonialsGrid | Patterns   | Stable |
+| Timeline         | Patterns   | Stable |
 
 ---
 
