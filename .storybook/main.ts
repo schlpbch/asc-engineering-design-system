@@ -22,7 +22,7 @@ const config = {
   ],
 
   framework: {
-    name: 'storybook-astro',
+    name: '@storybook-astro/framework',
     options: {},
   },
 
@@ -34,10 +34,6 @@ const config = {
     config.resolve ??= {};
     config.resolve.alias ??= {};
     (config.resolve.alias as Record<string, string>)['cssesc'] = resolve(__dirname, 'cssesc-esm.js');
-    (config.resolve.alias as Record<string, string>)['@storybook/blocks'] = resolve(
-      __dirname,
-      '../node_modules/@storybook/addon-docs/dist/blocks.js'
-    );
 
     config.plugins ??= [];
     (config.plugins as unknown[]).unshift(tailwindcss());
